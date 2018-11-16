@@ -1,0 +1,15 @@
+Como el juego se realizo en las ultimas
+semana de clase, el estudiante estaba
+agobiado por tantos trabajos que entregar
+asi que decidio hacer un juego que le
+permita destruir una ciudad por medio 
+de bombas, pero ojo que si te chocas con 
+un edificio perderas.
+Debes disparar las bombas con clic sobre
+el panel del juego y destruir todo, 
+pero ojo ¡TIENES TIEMPO LIMITADO!
+--
+FACIL:
+	*8 edificios
+	*El avión se movera muy rapido
+	*solo puedes lanzar una bomba por circuito

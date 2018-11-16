@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+
+<AnchorPane fx:id="nombre" prefHeight="477.0" prefWidth="697.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CampoJuegoController">
+   <children>
+      <Rectangle fx:id="pane" arcHeight="5.0" arcWidth="5.0" height="512.0" layoutX="-3.0" layoutY="-5.0" stroke="BLACK" strokeType="INSIDE" width="483.0" />
+      <Separator layoutX="473.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="505.0" prefWidth="15.0" />
+      <ImageView fx:id="jugador" fitHeight="84.0" fitWidth="124.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" rotate="0">
+         <image>
+            <Image url="@../../imgs/avion.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="537.0" layoutY="123.0" prefHeight="39.0" prefWidth="87.0" text="PUNTUACIÓN" />
+      <Label layoutX="567.0" layoutY="166.0" text="000" />
+      <Separator layoutX="490.0" layoutY="88.0" prefHeight="0.0" prefWidth="200.0" />
+      <Label alignment="CENTER" layoutX="519.0" layoutY="45.0" prefHeight="47.0" prefWidth="136.0" text="JUGADOR" textAlignment="CENTER" />
+      <Label alignment="CENTER" layoutX="534.0" layoutY="208.0" prefHeight="39.0" prefWidth="87.0" text="TIEMPO" />
+      <Label fx:id="tiempo" layoutX="567.0" layoutY="251.0" text="000" />
+      <Button fx:id="pausar" layoutX="530.0" layoutY="316.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="95.0" text="PAUSAR" />
+      <Button layoutX="530.0" layoutY="379.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="95.0" text="REINICIAR" />
+      <Circle fx:id="disparo" fill="#0084ff" layoutX="43.0" layoutY="110.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+      <Label fx:id="nombre" layoutX="567.0" layoutY="90.0" text="xxx" />
+      <ImageView fx:id="edificio1" fitHeight="150.0" fitWidth="200.0" layoutY="354.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../imgs/edificio.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="edificio2" fitHeight="113.0" fitWidth="61.0" layoutX="61.0" layoutY="391.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../imgs/edificio.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="edificio4" fitHeight="150.0" fitWidth="200.0" layoutX="183.0" layoutY="354.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../imgs/edificio.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="edificio5" fitHeight="113.0" fitWidth="61.0" layoutX="241.0" layoutY="391.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../imgs/edificio.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="edificio3" fitHeight="188.0" fitWidth="84.0" layoutX="107.0" layoutY="316.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../imgs/edificio.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="edificio6" fitHeight="158.0" fitWidth="76.0" layoutX="287.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../imgs/edificio.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="edificio7" fitHeight="201.0" fitWidth="76.0" layoutX="350.0" layoutY="316.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../imgs/edificio.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="edificio8" fitHeight="133.0" fitWidth="67.0" layoutX="424.0" layoutY="371.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../imgs/edificio.jpg" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
