@@ -13,7 +13,7 @@
    <children>
       <Rectangle fx:id="pane" arcHeight="5.0" arcWidth="5.0" height="512.0" layoutX="-3.0" layoutY="-5.0" stroke="BLACK" strokeType="INSIDE" width="483.0" />
       <Separator layoutX="473.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="505.0" prefWidth="15.0" />
-      <ImageView fx:id="jugador" fitHeight="84.0" fitWidth="124.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" rotate="0">
+      <ImageView fx:id="jugador" fitHeight="84.0" fitWidth="124.0" layoutX="65.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true" rotate="0">
          <image>
             <Image url="@../../imgs/avion.png" />
          </image>

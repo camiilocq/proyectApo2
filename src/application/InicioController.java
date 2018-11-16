@@ -16,7 +16,10 @@ public class InicioController {
 	@FXML private Button jugar;
 	@FXML private Button jugadore;
 	@FXML private Button ayuda;
-	
+	/*
+	 * hola como estas
+	 * jijijiji
+	 */
 	public void initialize() {
 		
 	}
