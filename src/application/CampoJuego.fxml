@@ -11,7 +11,12 @@
 
 <AnchorPane fx:id="nombre" prefHeight="477.0" prefWidth="697.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CampoJuegoController">
    <children>
-      <Rectangle fx:id="pane" arcHeight="5.0" arcWidth="5.0" height="512.0" layoutX="-3.0" layoutY="-5.0" stroke="BLACK" strokeType="INSIDE" width="483.0" />
+      <Rectangle fx:id="pane" arcHeight="5.0" arcWidth="5.0" height="493.0" layoutX="-3.0" layoutY="-5.0" stroke="BLACK" strokeType="INSIDE" width="483.0" />
+      <ImageView fitHeight="505.0" fitWidth="516.0" layoutY="-1.0" onMouseClicked="#pos" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../imgs/fondo1.jpg" />
+         </image>
+      </ImageView>
       <Separator layoutX="473.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="505.0" prefWidth="15.0" />
       <ImageView fx:id="jugador" fitHeight="84.0" fitWidth="124.0" layoutX="65.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true" rotate="0">
          <image>
