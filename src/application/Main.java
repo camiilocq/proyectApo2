@@ -16,14 +16,6 @@ public class Main extends Application {
 	private static Nivel nivel;
 	
 	public Main() {
-		/*
-		 * verifique que lo pueda subir
-		 * 
-		 * 
-		 * tygyuhijioiou
-		 * 
-		 * 
-		 */
 		Edificio[] edificios = new Edificio[10];
 		edificios[1] = new Edificio(-14,392);
 		edificios[2] = new Edificio(43,300);
