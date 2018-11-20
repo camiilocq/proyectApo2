@@ -83,8 +83,8 @@ public class CampoJuegoController {
 					@Override
 					public void handle(MouseEvent arg0) {
 						if(control == false) {
-							Main.getNivel().getJugador().getDisparo().setPosX(jugador.getLayoutX());
-							Main.getNivel().getJugador().getDisparo().setPosY(jugador.getLayoutY());
+							Main.getNivel().getJugador().getDisparo().setPosX(jugador.getLayoutX()+50);
+							Main.getNivel().getJugador().getDisparo().setPosY(jugador.getLayoutY()+70);
 							disparo.setLayoutX(Main.getNivel().getJugador().getDisparo().getPosX());
 							disparo.setLayoutY(Main.getNivel().getJugador().getDisparo().getPosY());
 							disparo.setVisible(true);
