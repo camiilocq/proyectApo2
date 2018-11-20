@@ -5,10 +5,14 @@ import interfaces.Disparable;
 public class Avion extends Ente {
 	
 	private int vida;
-	private double velocidad;
-	private Disparo disparo;
-	private String nombre;
 	private int puntuacion;
+	
+	private double velocidad;
+	
+	private Disparo disparo;
+	
+	private String nombre;
+	
 	
 	public Avion(double velocidad, int vida,String nombre,int puntuacion,Disparo disparo,double posX, double posY) {
 		super(posX,posY);

@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
@@ -28,6 +29,9 @@ public class CampoJuegoController {
 	@FXML private ImageView edificio6;
 	@FXML private ImageView edificio7;
 	@FXML private ImageView edificio8;
+	
+	@FXML
+	private ImageView fondo;
 	
 	
 	@FXML private Label tiempo;
@@ -74,16 +78,17 @@ public class CampoJuegoController {
 					Alert mensaje = new Alert(AlertType.INFORMATION, "chocaste", ButtonType.OK);
 					mensaje.show();
 				}
-				
-				pane.setOnMouseClicked(new EventHandler<Event>() {
+				fondo.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 					@Override
-					public void handle(Event arg0) {
+					public void handle(MouseEvent arg0) {
 						if(control == false) {
-						disparo.setLayoutX(Main.getNivel().getJugador().getDisparo().getPosX());
-						disparo.setLayoutY(Main.getNivel().getJugador().getDisparo().getPosY());
-						disparo.setVisible(true);
-						hDisparo.start();
+							Main.getNivel().getJugador().getDisparo().setPosX(jugador.getLayoutX());
+							Main.getNivel().getJugador().getDisparo().setPosY(jugador.getLayoutY());
+							disparo.setLayoutX(Main.getNivel().getJugador().getDisparo().getPosX());
+							disparo.setLayoutY(Main.getNivel().getJugador().getDisparo().getPosY());
+							disparo.setVisible(true);
+							hDisparo.start();
 						}else {
 							System.out.println("No se puede");
 						}
@@ -95,8 +100,6 @@ public class CampoJuegoController {
 		}));
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.play();
-		
-		
 		
 	}
 
