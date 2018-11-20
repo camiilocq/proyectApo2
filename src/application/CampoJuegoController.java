@@ -102,6 +102,11 @@ public class CampoJuegoController {
 		animation.play();
 		
 	}
+	
+	/**
+	 * Si sirve GitHub Desktop
+	 * Esta todo subido, voy a hacer lo de arboles y listas enlazadas
+	 */
 
 	public boolean isControl() {
 		return control;
