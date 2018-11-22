@@ -97,16 +97,14 @@ public class DificultadController {
 		dialog.setTitle("Mensaje");
 		dialog.setHeaderText("¡A JUGAR!");
 		dialog.setContentText("Por favor ingresa tu nombre: ");
-
-		// Traditional way to get the response value.
+		
 		Optional<String> result = dialog.showAndWait();
 		if (result.isPresent()){
 			int velocidad = 0;
-			int puntuacion = 0;
+			int puntuacion =0;
+			
 			Avion jugador = new Avion(velocidad, 1, result.get(), puntuacion, new Disparo(false,43,110), 65 ,26);
-			Main.getNivel().setJugador(jugador);
-		}
-		
+			Main.getNivel().setJugador(jugador);		
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("CampoJuego.fxml"));
 			Scene scene = new Scene(root);
@@ -118,6 +116,6 @@ public class DificultadController {
 			e.printStackTrace();
 		}
 	}
-	
+	}
 	
 }
