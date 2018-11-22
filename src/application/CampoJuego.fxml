@@ -29,8 +29,8 @@
       <Label alignment="CENTER" layoutX="519.0" layoutY="45.0" prefHeight="47.0" prefWidth="136.0" text="JUGADOR" textAlignment="CENTER" />
       <Label alignment="CENTER" layoutX="534.0" layoutY="208.0" prefHeight="39.0" prefWidth="87.0" text="TIEMPO" />
       <Label fx:id="tiempo" layoutX="567.0" layoutY="251.0" text="000" />
-      <Button fx:id="pausar" layoutX="530.0" layoutY="316.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="95.0" text="PAUSAR" />
-      <Button layoutX="530.0" layoutY="379.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="95.0" text="REINICIAR" />
+      <Button fx:id="pausar" layoutX="530.0" layoutY="316.0" mnemonicParsing="false" onAction="#pausar" prefHeight="39.0" prefWidth="95.0" text="PAUSAR" />
+      <Button fx:id="reiniciar" layoutX="530.0" layoutY="379.0" mnemonicParsing="false" onAction="#reiniciar" prefHeight="39.0" prefWidth="95.0" text="REINICIAR" />
       <Circle fx:id="disparo" fill="#0084ff" layoutX="43.0" layoutY="110.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
       <Label fx:id="nomJugador" layoutX="567.0" layoutY="90.0" text="xxx" />
       <ImageView fx:id="edificio1" fitHeight="150.0" fitWidth="200.0" layoutY="354.0" pickOnBounds="true" preserveRatio="true">
