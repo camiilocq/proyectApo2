@@ -32,7 +32,7 @@
       <Button fx:id="pausar" layoutX="530.0" layoutY="316.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="95.0" text="PAUSAR" />
       <Button layoutX="530.0" layoutY="379.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="95.0" text="REINICIAR" />
       <Circle fx:id="disparo" fill="#0084ff" layoutX="43.0" layoutY="110.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-      <Label fx:id="nombre" layoutX="567.0" layoutY="90.0" text="xxx" />
+      <Label fx:id="nomJugador" layoutX="567.0" layoutY="90.0" text="xxx" />
       <ImageView fx:id="edificio1" fitHeight="150.0" fitWidth="200.0" layoutY="354.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../imgs/edificio.jpg" />

@@ -27,7 +27,7 @@ public class Main extends Application {
 		edificios[8] = new Edificio(387,373);
 		edificios[9] = new Edificio(432,300);
 				
-		setNivel(new Nivel(edificios, new Avion(0, 1,"camilo", 0, new Disparo(false,43,110), 15, 26)));
+		setNivel(new Nivel(edificios,null));
 		
 	}
 	

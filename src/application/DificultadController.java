@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Optional;
 
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -13,7 +14,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
+import modelo.Avion;
+import modelo.Disparo;
 
 public class DificultadController {
 
@@ -89,6 +93,20 @@ public class DificultadController {
 	}
 	
 	public void jugar(Event event) {
+		TextInputDialog dialog = new TextInputDialog();
+		dialog.setTitle("Mensaje");
+		dialog.setHeaderText("¡A JUGAR!");
+		dialog.setContentText("Por favor ingresa tu nombre: ");
+
+		// Traditional way to get the response value.
+		Optional<String> result = dialog.showAndWait();
+		if (result.isPresent()){
+			int velocidad = 0;
+			int puntuacion = 0;
+			Avion jugador = new Avion(velocidad, 1, result.get(), puntuacion, new Disparo(false,43,110), 65 ,26);
+			Main.getNivel().setJugador(jugador);
+		}
+		
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("CampoJuego.fxml"));
 			Scene scene = new Scene(root);

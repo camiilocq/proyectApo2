@@ -36,6 +36,7 @@ public class CampoJuegoController {
 	
 	@FXML private Label tiempo;
 //	@FXML private Label nombre;
+	@FXML private Label nomJugador;
 	
 	@FXML private Circle disparo;
 	@FXML private Rectangle pane;
@@ -48,7 +49,8 @@ public class CampoJuegoController {
 	private Timeline animation;
 	
 	public void initialize() {
-		
+//		nombre.setText(Main.getNivel().getJugador().getNombre());
+		nomJugador.setText(Main.getNivel().getJugador().getNombre().toUpperCase());
 		juego = true; 
 		tiempo.setText(0+"");
 		hTiempo = new HiloTiempo(this);

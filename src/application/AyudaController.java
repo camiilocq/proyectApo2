@@ -22,9 +22,7 @@ public class AyudaController {
 
 	@FXML private Button volver;
 	@FXML private TextArea ayuda;
-	/*
-	 * dfguhjk
-	 */
+	
 	
 	public void initialize() {
 		File file = null;
