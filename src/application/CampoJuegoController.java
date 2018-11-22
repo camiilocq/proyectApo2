@@ -1,6 +1,7 @@
 package application;
 import hilos.HiloDisparo;
 import hilos.HiloTiempo;
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -35,13 +36,14 @@ public class CampoJuegoController {
 	
 	
 	@FXML private Label tiempo;
-//	@FXML private Label nombre;
 	@FXML private Label nomJugador;
 	
 	@FXML private Circle disparo;
 	@FXML private Rectangle pane;
 	
 	@FXML private Button pausar;
+	@FXML private Button reiniciar;
+	
 	private boolean control;
 	private boolean juego;
 	private HiloDisparo hDisparo;
@@ -49,7 +51,6 @@ public class CampoJuegoController {
 	private Timeline animation;
 	
 	public void initialize() {
-//		nombre.setText(Main.getNivel().getJugador().getNombre());
 		nomJugador.setText(Main.getNivel().getJugador().getNombre().toUpperCase());
 		juego = true; 
 		tiempo.setText(0+"");
@@ -143,8 +144,18 @@ public class CampoJuegoController {
 	}
 	
 	public void pausar() {
-		juego = !juego;
-		
+	if(animation.getStatus().equals(Animation.Status.RUNNING)) {
+		animation.stop();
+		pausar.setText("INICIAR");
+	}else{
+		animation.play();
+		pausar.setText("PAUSAR");
+	}
+	}
+	
+	public void reiniciar() {
+		Main.getNivel().getJugador().setPosX(0);
+		Main.getNivel().getJugador().setPosY(0);
 	}
 	
 	public boolean verificar(){
