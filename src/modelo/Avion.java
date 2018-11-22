@@ -1,11 +1,20 @@
 package modelo;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 import interfaces.Disparable;
 
 public class Avion extends Ente {
 	
 	private int vida;
 	private int puntuacion;
+	private Avion der;
+	private Avion izq;
 	
 	private double velocidad;
 	
@@ -21,6 +30,7 @@ public class Avion extends Ente {
 		this.puntuacion = puntuacion;
 		this.vida = vida;
 		this.velocidad = velocidad;
+		der = izq = null;
 	}
 
 	public int getVida() {
@@ -68,8 +78,31 @@ public class Avion extends Ente {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
-	
 
+	public Avion getDer() {
+		return der;
+	}
+
+	public void setDer(Avion der) {
+		this.der = der;
+	}
+
+	public Avion getIzq() {
+		return izq;
+	}
+
+	public void setIzq(Avion izq) {
+		this.izq = izq;
+	}
+	
+	public Avion buscar(String nombre) {
+		if(nombre.compareToIgnoreCase(nombre)==0) {
+			return this;
+		}else if(nombre.compareToIgnoreCase(nombre)>0) {
+			return (izq ==null)?null:izq.buscar(nombre);
+		}else {
+				return (der == null)?null:der.buscar(nombre);
+		}
+	}
 	
 }

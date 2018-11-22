@@ -13,7 +13,7 @@
          <image>
             <Image url="@../../imgs/fondo-militar.jpg" />
          </image></ImageView>
-      <Label layoutX="165.0" layoutY="132.0" prefHeight="53.0" prefWidth="174.0" text="TANK WAR" textFill="WHITE">
+      <Label layoutX="165.0" layoutY="132.0" prefHeight="53.0" prefWidth="174.0" text="AIR WAR" textFill="WHITE">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>

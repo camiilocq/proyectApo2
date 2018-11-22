@@ -1,8 +1,11 @@
 package modelo;
 
+
+import java.io.Serializable;
+
 import interfaces.Movible;
 
-public abstract class Ente implements Movible {
+public abstract class Ente implements Movible, Serializable {
 	private double posX;
 	private double posY;
 
@@ -26,5 +29,6 @@ public abstract class Ente implements Movible {
 	public void setPosY(double posY) {
 		this.posY = posY;
 	}
+	
 	
 }

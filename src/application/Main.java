@@ -37,14 +37,16 @@ public class Main extends Application {
 			Pane root = (Pane)FXMLLoader.load(getClass().getResource("Inicio.fxml"));
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
-			primaryStage.setTitle("TANK WAR");
+			primaryStage.setTitle("AIR WAR");
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	
+	public Avion buscar(String nombre) {
+		return nivel.buscar(nombre);
+	}
 
 	public static Nivel getNivel() {
 		return nivel;
