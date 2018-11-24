@@ -16,6 +16,8 @@ public class Avion extends Ente {
 	private Avion der;
 	private Avion izq;
 	
+	private Avion next;
+	
 	private double velocidad;
 	
 	private Disparo disparo;
@@ -113,6 +115,14 @@ public class Avion extends Ente {
 			valor = 1;
 		}
 		return valor;
+	}
+
+	public Avion getNext() {
+		return next;
+	}
+
+	public void setNext(Avion next) {
+		this.next = next;
 	}
 	
 }
