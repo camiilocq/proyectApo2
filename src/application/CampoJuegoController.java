@@ -1,4 +1,6 @@
 package application;
+import java.io.IOException;
+
 import hilos.HiloDisparo;
 import hilos.HiloPuntuacion;
 import hilos.HiloTiempo;
@@ -9,7 +11,11 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -19,7 +25,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import javafx.util.Duration;
+import modelo.Avion;
 
 public class CampoJuegoController {
 	
@@ -46,6 +54,7 @@ public class CampoJuegoController {
 	
 	@FXML private Button pausar;
 	@FXML private Button reiniciar;
+	@FXML private Button guardar;
 	
 	private boolean control;
 	private boolean juego;
@@ -54,32 +63,36 @@ public class CampoJuegoController {
 	private HiloPuntuacion hPuntuacion;
 	private Timeline animation;
 	
+	private Avion juga;
+	
 	public void initialize() {
+		juga = Main.getNivel().getJugador();
 		tiempo.setText("000");
-		nomJugador.setText(Main.getNivel().getJugador().getNombre().toUpperCase());
+		nomJugador.setText(juga.getNombre().toUpperCase());
 		juego = true; 
-		hTiempo = new HiloTiempo(Main.getNivel().getJugador(),this);
-		hPuntuacion = new HiloPuntuacion(Main.getNivel().getJugador(), this);
-		hDisparo = new HiloDisparo(Main.getNivel().getJugador().getDisparo(), this);
+		hTiempo = new HiloTiempo(juga,this);
+		hPuntuacion = new HiloPuntuacion(juga, this);
+		hDisparo = new HiloDisparo(juga.getDisparo(), this);
 		disparo.setVisible(false);
 		
-		animation = new Timeline(new KeyFrame(Duration.millis(10), new EventHandler<ActionEvent>() {
+		
+		animation = new Timeline(new KeyFrame(Duration.millis(juga.getVelocidad()), new EventHandler<ActionEvent>() {
 			
 			int dx = 5;
 			@Override
 			public void handle(ActionEvent a) {
-				tiempo.setText(Main.getNivel().getJugador().getTiempo()+"");
-				puntuacion.setText(Main.getNivel().getJugador().getPuntuacion()+"");
-				Main.getNivel().getJugador().setPosX(Main.getNivel().getJugador().getPosX()+dx);
-				jugador.setLayoutX(Main.getNivel().getJugador().getPosX());
-				jugador.setLayoutY(Main.getNivel().getJugador().getPosY());
+				tiempo.setText(juga.getTiempo()+"");
+				puntuacion.setText(juga.getPuntuacion()+"");
+				juga.setPosX(juga.getPosX()+dx);
+				jugador.setLayoutX(juga.getPosX());
+				jugador.setLayoutY(juga.getPosY());
 				
-				if(Main.getNivel().getJugador().getPosX()>= (pane.getWidth()-jugador.getFitWidth()*0.9)) {
-					Main.getNivel().getJugador().setPosX(0);
-					Main.getNivel().getJugador().setPosY(Main.getNivel().getJugador().getPosY()+30);
+				if(juga.getPosX()>= (pane.getWidth()-jugador.getFitWidth()*0.9)) {
+					juga.setPosX(0);
+					juga.setPosY(juga.getPosY()+30);
 				}
 				
-				if(Main.getNivel().getJugador().getDisparo().getPosY()>pane.getHeight()) {
+				if(juga.getDisparo().getPosY()>pane.getHeight()) {
 					control = false;
 				}
 				
@@ -92,10 +105,10 @@ public class CampoJuegoController {
 					@Override
 					public void handle(MouseEvent arg0) {
 						if(control == false) {
-							Main.getNivel().getJugador().getDisparo().setPosX(jugador.getLayoutX()+50);
-							Main.getNivel().getJugador().getDisparo().setPosY(jugador.getLayoutY()+70);
-							disparo.setLayoutX(Main.getNivel().getJugador().getDisparo().getPosX());
-							disparo.setLayoutY(Main.getNivel().getJugador().getDisparo().getPosY());
+							juga.getDisparo().setPosX(jugador.getLayoutX()+50);
+							juga.getDisparo().setPosY(jugador.getLayoutY()+70);
+							disparo.setLayoutX(juga.getDisparo().getPosX());
+							disparo.setLayoutY(juga.getDisparo().getPosY());
 							disparo.setVisible(true);
 							hDisparo.start();
 						}else {
@@ -113,11 +126,6 @@ public class CampoJuegoController {
 		hPuntuacion.start();
 	}
 	
-	/**
-	 * Si sirve GitHub Desktop
-	 * Esta todo subido, voy a hacer lo de arboles y listas enlazadas
-	 */
-
 	public boolean isControl() {
 		return control;
 	}
@@ -161,23 +169,23 @@ public class CampoJuegoController {
 	}else{
 		animation.play();
 		pausar.setText("PAUSAR");
-		hTiempo = new HiloTiempo(Main.getNivel().getJugador(), this);
-		hPuntuacion = new HiloPuntuacion(Main.getNivel().getJugador(), this);
+		hTiempo = new HiloTiempo(juga, this);
+		hPuntuacion = new HiloPuntuacion(juga, this);
 		hTiempo.start();
 		hPuntuacion.start();
 	}
 	}
 	
 	public void reiniciar() {
-		Main.getNivel().getJugador().setPosX(0);
-		Main.getNivel().getJugador().setPosY(0);
-		Main.getNivel().getJugador().setPuntuacion(0);
-		Main.getNivel().getJugador().setTiempo(0);
+		juga.setPosX(0);
+		juga.setPosY(0);
+		juga.setPuntuacion(0);
+		juga.setTiempo(0);
 	}
 	
 	public boolean verificar(){
-		double x = Main.getNivel().getJugador().getPosX();
-		double y = Main.getNivel().getJugador().getPosY();
+		double x = juga.getPosX();
+		double y = juga.getPosY();
 //	if(y-edificio1.getLayoutY()>=0) {
 //		return true;
 //	}
@@ -186,4 +194,19 @@ public class CampoJuegoController {
 //	}
 		return false;
 	}
+	
+	public void guardar(Event event){
+		Main.getNivel().guardar(juga);
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource("Jugadores.fxml"));
+			Scene scene = new Scene(root);
+			Stage windows = (Stage)((Node)event.getSource()).getScene().getWindow();
+			
+			windows.setScene(scene);
+			windows.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
+	
+}

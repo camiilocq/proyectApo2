@@ -84,5 +84,6 @@
          </image>
       </ImageView>
       <Label layoutX="617.0" layoutY="252.0" text="Segundos" />
+      <Button fx:id="guardar" layoutX="539.0" layoutY="435.0" mnemonicParsing="false" onAction="#guardar" prefHeight="39.0" prefWidth="95.0" text="GUARDAR" />
    </children>
 </AnchorPane>
