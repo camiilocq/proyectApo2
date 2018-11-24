@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="nombre" prefHeight="477.0" prefWidth="697.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CampoJuegoController">
    <children>
@@ -23,16 +24,25 @@
             <Image url="@../../imgs/avion.png" />
          </image>
       </ImageView>
-      <Label layoutX="537.0" layoutY="123.0" prefHeight="39.0" prefWidth="87.0" text="PUNTUACIÓN" />
-      <Label layoutX="567.0" layoutY="166.0" text="000" />
+      <Label layoutX="544.0" layoutY="123.0" prefHeight="39.0" prefWidth="87.0" text="PUNTUACIÓN">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Label>
+      <Label fx:id="puntuacion" layoutX="577.0" layoutY="168.0" text="000" />
       <Separator layoutX="490.0" layoutY="88.0" prefHeight="0.0" prefWidth="200.0" />
-      <Label alignment="CENTER" layoutX="519.0" layoutY="45.0" prefHeight="47.0" prefWidth="136.0" text="JUGADOR" textAlignment="CENTER" />
-      <Label alignment="CENTER" layoutX="534.0" layoutY="208.0" prefHeight="39.0" prefWidth="87.0" text="TIEMPO" />
-      <Label fx:id="tiempo" layoutX="567.0" layoutY="251.0" text="000" />
-      <Button fx:id="pausar" layoutX="530.0" layoutY="316.0" mnemonicParsing="false" onAction="#pausar" prefHeight="39.0" prefWidth="95.0" text="PAUSAR" />
-      <Button fx:id="reiniciar" layoutX="530.0" layoutY="379.0" mnemonicParsing="false" onAction="#reiniciar" prefHeight="39.0" prefWidth="95.0" text="REINICIAR" />
+      <Label alignment="CENTER" layoutX="519.0" layoutY="45.0" prefHeight="47.0" prefWidth="136.0" text="JUGADOR" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font></Label>
+      <Label alignment="CENTER" layoutX="544.0" layoutY="203.0" prefHeight="39.0" prefWidth="87.0" text="TIEMPO">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Label>
+      <Label fx:id="tiempo" layoutX="577.0" layoutY="252.0" text="000" />
+      <Button fx:id="pausar" layoutX="540.0" layoutY="316.0" mnemonicParsing="false" onAction="#pausar" prefHeight="39.0" prefWidth="95.0" text="PAUSAR" />
+      <Button fx:id="reiniciar" layoutX="540.0" layoutY="379.0" mnemonicParsing="false" onAction="#reiniciar" prefHeight="39.0" prefWidth="95.0" text="REINICIAR" />
       <Circle fx:id="disparo" fill="#0084ff" layoutX="43.0" layoutY="110.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-      <Label fx:id="nomJugador" layoutX="567.0" layoutY="90.0" text="xxx" />
+      <Label fx:id="nomJugador" layoutX="565.0" layoutY="89.0" text="CAMILO" />
       <ImageView fx:id="edificio1" fitHeight="150.0" fitWidth="200.0" layoutY="354.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../imgs/edificio.jpg" />
@@ -73,5 +83,6 @@
             <Image url="@../../imgs/edificio.jpg" />
          </image>
       </ImageView>
+      <Label layoutX="617.0" layoutY="252.0" text="Segundos" />
    </children>
 </AnchorPane>

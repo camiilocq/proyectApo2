@@ -3,23 +3,23 @@ package hilos;
 import application.CampoJuegoController;
 import modelo.Avion;
 
-public class HiloTiempo extends Thread {
+public class HiloPuntuacion extends Thread {
 
 	private Avion jugador;
 	private CampoJuegoController campo;
 	
-	public HiloTiempo (Avion jugador, CampoJuegoController campo) {
+	public HiloPuntuacion(Avion jugador, CampoJuegoController campo) {
 		this.jugador = jugador;
 		this.campo = campo;
 	}
 
 	@Override
 	public void run() {
-		while(campo.isJuego()){
-			jugador.setTiempo(jugador.getTiempo()+1);
+		while(campo.isJuego()) {
+			jugador.setPuntuacion(jugador.getPuntuacion()+2);
 			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
+				Thread.sleep(200);
+			}catch (Exception e) {
 				e.printStackTrace();
 			}
 		}

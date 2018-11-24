@@ -15,6 +15,7 @@ public class Avion extends Ente {
 	private int puntuacion;
 	private Avion der;
 	private Avion izq;
+	private int tiempo;
 	
 	private double velocidad;
 	
@@ -23,8 +24,9 @@ public class Avion extends Ente {
 	private String nombre;
 	
 	
-	public Avion(double velocidad, int vida,String nombre,int puntuacion,Disparo disparo,double posX, double posY) {
+	public Avion(int tiempo, double velocidad, int vida,String nombre,int puntuacion,Disparo disparo,double posX, double posY) {
 		super(posX,posY);
+		this.tiempo = tiempo;
 		this.disparo = disparo;
 		this.nombre = nombre;
 		this.puntuacion = puntuacion;
@@ -95,6 +97,14 @@ public class Avion extends Ente {
 		this.izq = izq;
 	}
 	
+	public int getTiempo() {
+		return tiempo;
+	}
+
+	public void setTiempo(int tiempo) {
+		this.tiempo = tiempo;
+	}
+
 	public Avion buscar(String nombre) {
 		if(nombre.compareToIgnoreCase(nombre)==0) {
 			return this;

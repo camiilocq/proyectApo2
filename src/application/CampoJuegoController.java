@@ -1,5 +1,6 @@
 package application;
 import hilos.HiloDisparo;
+import hilos.HiloPuntuacion;
 import hilos.HiloTiempo;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -8,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.HPos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -36,6 +38,7 @@ public class CampoJuegoController {
 	
 	
 	@FXML private Label tiempo;
+	@FXML private Label puntuacion;
 	@FXML private Label nomJugador;
 	
 	@FXML private Circle disparo;
@@ -48,13 +51,15 @@ public class CampoJuegoController {
 	private boolean juego;
 	private HiloDisparo hDisparo;
 	private HiloTiempo hTiempo;
+	private HiloPuntuacion hPuntuacion;
 	private Timeline animation;
 	
 	public void initialize() {
+		tiempo.setText("000");
 		nomJugador.setText(Main.getNivel().getJugador().getNombre().toUpperCase());
 		juego = true; 
-		tiempo.setText(0+"");
-		hTiempo = new HiloTiempo(this);
+		hTiempo = new HiloTiempo(Main.getNivel().getJugador(),this);
+		hPuntuacion = new HiloPuntuacion(Main.getNivel().getJugador(), this);
 		hDisparo = new HiloDisparo(Main.getNivel().getJugador().getDisparo(), this);
 		disparo.setVisible(false);
 		
@@ -63,7 +68,8 @@ public class CampoJuegoController {
 			int dx = 5;
 			@Override
 			public void handle(ActionEvent a) {
-//				hTiempo.start();
+				tiempo.setText(Main.getNivel().getJugador().getTiempo()+"");
+				puntuacion.setText(Main.getNivel().getJugador().getPuntuacion()+"");
 				Main.getNivel().getJugador().setPosX(Main.getNivel().getJugador().getPosX()+dx);
 				jugador.setLayoutX(Main.getNivel().getJugador().getPosX());
 				jugador.setLayoutY(Main.getNivel().getJugador().getPosY());
@@ -103,7 +109,8 @@ public class CampoJuegoController {
 		}));
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.play();
-		
+		hTiempo.start();
+		hPuntuacion.start();
 	}
 	
 	/**
@@ -120,7 +127,11 @@ public class CampoJuegoController {
 	}
 
 	public boolean isJuego() {
-		return juego;
+		if(animation.getStatus().equals(Animation.Status.RUNNING)) {
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	public void setJuego(boolean juego) {
@@ -150,43 +161,29 @@ public class CampoJuegoController {
 	}else{
 		animation.play();
 		pausar.setText("PAUSAR");
+		hTiempo = new HiloTiempo(Main.getNivel().getJugador(), this);
+		hPuntuacion = new HiloPuntuacion(Main.getNivel().getJugador(), this);
+		hTiempo.start();
+		hPuntuacion.start();
 	}
 	}
 	
 	public void reiniciar() {
 		Main.getNivel().getJugador().setPosX(0);
 		Main.getNivel().getJugador().setPosY(0);
+		Main.getNivel().getJugador().setPuntuacion(0);
+		Main.getNivel().getJugador().setTiempo(0);
 	}
 	
 	public boolean verificar(){
 		double x = Main.getNivel().getJugador().getPosX();
 		double y = Main.getNivel().getJugador().getPosY();
-		if(x==pane.getHeight()-edificio1.getFitHeight()) {
-			animation.stop();
-			return true;
-		}else if(edificio2.getLayoutX()-x <= edificio1.getFitWidth()&&edificio2.getLayoutY()-y<=edificio2.getFitHeight()) {
-			animation.stop();
-			return true;
-		}else if(edificio3.getLayoutX()-x <= edificio1.getFitWidth()&&edificio2.getLayoutY()-y<=edificio3.getFitHeight()) {
-			animation.stop();
-			return true;
-		}else if(edificio4.getLayoutX()-x <= edificio1.getFitWidth()&&edificio2.getLayoutY()-y<=edificio4.getFitHeight()) {
-			animation.stop();
-			return true;
-		}else if(edificio5.getLayoutX()-x <= edificio1.getFitWidth()&&edificio2.getLayoutY()-y<=edificio5.getFitHeight()) {
-			animation.stop();
-			return true;
-		}else if(edificio6.getLayoutX()-x <= edificio1.getFitWidth()&&edificio2.getLayoutY()-y<=edificio6.getFitHeight()) {
-			animation.stop();
-			return true;
-		}else if(edificio7.getLayoutX()-x <= edificio1.getFitWidth()&&edificio2.getLayoutY()-y<=edificio7.getFitHeight()) {
-			animation.stop();
-			return true;
-		}else if(edificio8.getLayoutX()-x <= edificio1.getFitWidth()&&edificio2.getLayoutY()-y<=edificio8.getFitHeight()) {
-			animation.stop();
-			return true;
-		}else 
-			return false;
+//	if(y-edificio1.getLayoutY()>=0) {
+//		return true;
+//	}
+//	else {
+//		return false;
+//	}
+		return false;
 	}
-		
 	}
