@@ -117,9 +117,9 @@ public class DificultadController {
 			if(dificultad == 'F') 
 				velocidad = 20;
 			else if(dificultad == 'I')
-				velocidad = 17;
+				velocidad = 15;
 			else if(dificultad == 'D')
-				velocidad = 14;
+				velocidad = 10;
 			
 			int puntuacion =0;
 			
