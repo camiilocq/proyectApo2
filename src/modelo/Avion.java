@@ -105,4 +105,14 @@ public class Avion extends Ente {
 		}
 	}
 	
+	public int compareTo(String name) {
+		int valor = 0;
+		if(this.nombre.compareTo(name) < 0) {
+			valor = -1;
+		} else if(this.nombre.compareTo(name) > 0) {
+			valor = 1;
+		}
+		return valor;
+	}
+	
 }
