@@ -15,6 +15,10 @@ public class Main extends Application {
 	
 	private static Nivel nivel;
 	
+	/**
+	 * Comentario
+	 */
+	
 	public Main() {
 		Edificio[] edificios = new Edificio[10];
 		edificios[1] = new Edificio(-14,392);

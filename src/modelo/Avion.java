@@ -17,6 +17,8 @@ public class Avion extends Ente {
 	private Avion izq;
 	private int tiempo;
 	
+	private Avion next;
+	
 	private double velocidad;
 	
 	private Disparo disparo;
@@ -113,6 +115,24 @@ public class Avion extends Ente {
 		}else {
 				return (der == null)?null:der.buscar(nombre);
 		}
+	}
+	
+	public int compareTo(String name) {
+		int valor = 0;
+		if(this.nombre.compareTo(name) < 0) {
+			valor = -1;
+		} else if(this.nombre.compareTo(name) > 0) {
+			valor = 1;
+		}
+		return valor;
+	}
+
+	public Avion getNext() {
+		return next;
+	}
+
+	public void setNext(Avion next) {
+		this.next = next;
 	}
 	
 }
