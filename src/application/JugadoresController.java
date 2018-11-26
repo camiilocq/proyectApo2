@@ -67,6 +67,7 @@ public class JugadoresController {
 	public void initialize() {
 		lisJugadores.setEditable(false);
 		loadJugadores();
+		mostrar();
 	}
 	
 	/**
