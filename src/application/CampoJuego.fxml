@@ -6,7 +6,6 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -19,7 +18,7 @@
          </image>
       </ImageView>
       <Separator layoutX="473.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="505.0" prefWidth="15.0" />
-      <ImageView fx:id="jugador" fitHeight="84.0" fitWidth="124.0" layoutX="65.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true" rotate="0">
+      <ImageView fx:id="jugador" fitHeight="84.0" fitWidth="124.0" layoutX="51.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true" rotate="0">
          <image>
             <Image url="@../../imgs/avion.png" />
          </image>
@@ -41,7 +40,6 @@
       <Label fx:id="tiempo" layoutX="577.0" layoutY="252.0" text="000" />
       <Button fx:id="pausar" layoutX="540.0" layoutY="316.0" mnemonicParsing="false" onAction="#pausar" prefHeight="39.0" prefWidth="95.0" text="PAUSAR" />
       <Button fx:id="reiniciar" layoutX="540.0" layoutY="379.0" mnemonicParsing="false" onAction="#reiniciar" prefHeight="39.0" prefWidth="95.0" text="REINICIAR" />
-      <Circle fx:id="disparo" fill="#0084ff" layoutX="43.0" layoutY="110.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
       <Label fx:id="nomJugador" layoutX="565.0" layoutY="89.0" text="CAMILO" />
       <ImageView fx:id="edificio1" fitHeight="150.0" fitWidth="200.0" layoutY="354.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -53,12 +51,12 @@
             <Image url="@../../imgs/edificio.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="edificio4" fitHeight="150.0" fitWidth="200.0" layoutX="183.0" layoutY="354.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="edificio4" fitHeight="90.0" fitWidth="44.0" layoutX="183.0" layoutY="414.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../imgs/edificio.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="edificio5" fitHeight="113.0" fitWidth="61.0" layoutX="241.0" layoutY="391.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="edificio5" fitHeight="133.0" fitWidth="76.0" layoutX="219.0" layoutY="371.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../imgs/edificio.jpg" />
          </image>
@@ -68,22 +66,27 @@
             <Image url="@../../imgs/edificio.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="edificio6" fitHeight="158.0" fitWidth="76.0" layoutX="287.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="edificio6" fitHeight="166.0" fitWidth="67.0" layoutX="273.0" layoutY="338.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../imgs/edificio.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="edificio7" fitHeight="201.0" fitWidth="76.0" layoutX="350.0" layoutY="316.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="edificio7" fitHeight="202.0" fitWidth="84.0" layoutX="340.0" layoutY="302.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../imgs/edificio.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="edificio8" fitHeight="133.0" fitWidth="67.0" layoutX="424.0" layoutY="371.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="edificio8" fitHeight="140.0" fitWidth="61.0" layoutX="422.0" layoutY="364.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../imgs/edificio.jpg" />
          </image>
       </ImageView>
       <Label layoutX="617.0" layoutY="252.0" text="Segundos" />
       <Button fx:id="guardar" layoutX="539.0" layoutY="435.0" mnemonicParsing="false" onAction="#guardar" prefHeight="39.0" prefWidth="95.0" text="GUARDAR" />
+      <ImageView fx:id="misil" fitHeight="39.0" fitWidth="46.0" layoutX="11.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true" rotate="136.7">
+         <image>
+            <Image url="@../../imgs/icons8-misil-30.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

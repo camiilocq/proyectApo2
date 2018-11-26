@@ -41,6 +41,8 @@ public class CampoJuegoController {
 	@FXML private ImageView edificio7;
 	@FXML private ImageView edificio8;
 	
+	@FXML private ImageView misil;
+	
 	@FXML
 	private ImageView fondo;
 	
@@ -49,7 +51,6 @@ public class CampoJuegoController {
 	@FXML private Label puntuacion;
 	@FXML private Label nomJugador;
 	
-	@FXML private Circle disparo;
 	@FXML private Rectangle pane;
 	
 	@FXML private Button pausar;
@@ -78,9 +79,8 @@ public class CampoJuegoController {
 		
 		nomJugador.setText(juga.getNombre().toUpperCase());
 		juego = true; 
-		disparo.setVisible(false);
-		juga.getDisparo().setPosX(juga.getPosX());
-		juga.getDisparo().setPosY(juga.getPosY());
+		misil.setVisible(false);
+
 		
 		animation = new Timeline(new KeyFrame(Duration.millis(juga.getVelocidad()), new EventHandler<ActionEvent>() {
 			
@@ -108,25 +108,34 @@ public class CampoJuegoController {
 					Alert mensaje = new Alert(AlertType.INFORMATION, "Tu avion choco, tienes un puntaje de: "+puntuacion.getText()+" y un tiempo de: "+tiempo.getText()+" seg.", ButtonType.OK);
 					animation.stop();
 					mensaje.show();
+
+					/*
+					 * falta por modificar
+					 */
 //					guardar()
+					/*
+					 * solo este metodo
+					 */
 				}
 				
 				//======================================================================================
-				//						controlo el disparo
+				//						controlo el misil
 				//======================================================================================
 				
-				disparo.setLayoutX(juga.getDisparo().getPosX());
-				disparo.setLayoutY(juga.getDisparo().getPosY());
 				
-				if(juga.getDisparo().getPosY()>pane.getHeight()*0.8) {
+				if(juga.getDisparo().getPosY()>fondo.getFitHeight()) {
 					juga.getDisparo().setActivo(false);
-					disparo.setVisible(false);
+					misil.setVisible(false);
 				}
 				if(juga.getDisparo().isActivo()) {
+					misil.setVisible(true);
 					juga.getDisparo().setPosY(juga.getDisparo().getPosY()+4);
+					misil.setLayoutY(juga.getDisparo().getPosY());
+				}else {
+					misil.setVisible(false);
 				}
 				if(impacto()) {
-					disparo.setVisible(false);
+					misil.setVisible(false);
 					juga.getDisparo().setPosX(juga.getPosX());
 					juga.getDisparo().setPosY(juga.getPosY());
 					juga.getDisparo().setActivo(false);
@@ -135,12 +144,9 @@ public class CampoJuegoController {
 
 					@Override
 					public void handle(MouseEvent arg0) {
-						if(juga.getDisparo().isActivo()==false) {
-						juga.getDisparo().setActivo(true);
-						disparo.setVisible(true);
-						}else {
-							System.out.println("aun no");
-						}
+						misil.setLayoutX(juga.getDisparo().getPosX());
+						juga.getDisparo().setActivo(!juga.getDisparo().isActivo());
+						
 					}
 				});
 				
@@ -155,47 +161,47 @@ public class CampoJuegoController {
 	
 	public boolean impacto() {
 		boolean retorno = false;
-		double posX = juga.getDisparo().getPosX();
-		double posY = juga.getDisparo().getPosY();
-		if(edificio1.getLayoutX()<=posX && posX<=edificio1.getLayoutX()+edificio1.getFitWidth()) {
-			if((edificio1.getLayoutY()+edificio1.getFitHeight())-posY<=10) {
-			edificio1.setVisible(false);
-			retorno = true;
+		double disY = juga.getDisparo().getPosY()+misil.getFitWidth();
+		double disX = juga.getDisparo().getPosX();
+		if(disX<61) {
+			if(disY>edificio1.getLayoutY()) {
+				edificio1.setVisible(false);
+				return true;
 			}
-		}else if(edificio2.getLayoutX()<=posX && posX<=edificio2.getLayoutX()+edificio2.getFitWidth()) {
-			if((edificio2.getLayoutY()+edificio2.getFitHeight())-posY<=10) {
-			edificio2.setVisible(false);
-			retorno = true;
+		}else if(disX<107 && disX >=61) {
+			if(disY>edificio2.getLayoutY()) {
+				edificio2.setVisible(false);
+				return true;
 			}
-		}else if(edificio3.getLayoutX()<=posX && posX<=edificio3.getLayoutX()+edificio3.getFitWidth()) {
-			if((edificio3.getLayoutY()+edificio3.getFitHeight())-posY<=10) {
-			edificio3.setVisible(false);
-			retorno = true;
+		}else if(disX<183 && disX >=107) {
+			if(disY>edificio3.getLayoutY()) {
+				edificio3.setVisible(false);
+				return true;
 			}
-		}else if(edificio4.getLayoutX()<=posX && posX<=edificio4.getLayoutX()+edificio4.getFitWidth()) {
-			if((edificio4.getLayoutY()+edificio4.getFitHeight())-posY<=10) {
-			edificio4.setVisible(false);
-			retorno = true;
+		}else if(disX<219 && disX >=183) {
+			if(disY>edificio4.getLayoutY()) {
+				edificio4.setVisible(false);
+				return true;
 			}
-		}else if(edificio5.getLayoutX()<=posX && posX<=edificio5.getLayoutX()+edificio5.getFitWidth()) {
-			if((edificio5.getLayoutY()+edificio5.getFitHeight())-posY<=10) {
-			edificio5.setVisible(false);
-			retorno = true;
+		}else if(disX<273 && disX >=219) {
+			if(disY>edificio5.getLayoutY()) {
+				edificio5.setVisible(false);
+				return true;
 			}
-		}else if(edificio6.getLayoutX()<=posX && posX<=edificio6.getLayoutX()+edificio6.getFitWidth()) {
-			if((edificio6.getLayoutY()+edificio6.getFitHeight())-posY<=10) {
-			edificio6.setVisible(false);
-			retorno = true;
+		}else if(disX<340 && disX >=273) {
+			if(disY>edificio6.getLayoutY()) {
+				edificio6.setVisible(false);
+				return true;
 			}
-		}else if(edificio7.getLayoutX()<=posX && posX<=edificio7.getLayoutX()+edificio7.getFitWidth()) {
-			if((edificio7.getLayoutY()+edificio7.getFitHeight())-posY<=10) {
-			edificio7.setVisible(false);
-			retorno = true;
+		}else if(disX<422 && disX >=340) {
+			if(disY>edificio7.getLayoutY()) {
+				edificio7.setVisible(false);
+				return true;
 			}
-		}else if(edificio8.getLayoutX()<=posX && posX<=edificio8.getLayoutX()+edificio8.getFitWidth()) {
-			if((edificio8.getLayoutY()+edificio8.getFitHeight())-posY<=10) {
-			edificio8.setVisible(false);
-			retorno = true;
+		}else if(disX<516 && disX >=422) {
+			if(disY>edificio8.getLayoutY()) {
+				edificio8.setVisible(false);
+				return true;
 			}
 		}
 		return retorno;
@@ -228,14 +234,6 @@ public class CampoJuegoController {
 	public void setTiempo(Label tiempo) {
 		this.tiempo = tiempo;
 	}
-
-	public Circle getDisparo() {
-		return disparo;
-	}
-
-	public void setDisparo(Circle disparo) {
-		this.disparo = disparo;
-	}
 	
 	public void pausar() {
 	if(animation.getStatus().equals(Animation.Status.RUNNING)) {
@@ -258,15 +256,43 @@ public class CampoJuegoController {
 		juga.setTiempo(0);
 	}
 	
+	
 	public boolean verificar(){
-		double x = juga.getPosX();
-		double y = juga.getPosY();
-//	if(y-edificio1.getLayoutY()>=0) {
-//		return true;
-//	}
-//	else {
-//		return false;
-//	}
+		double disY = jugador.getLayoutY()-10;
+		double disX = jugador.getLayoutX()-jugador.getFitWidth();
+		if(disX<61) {
+			if(disY>edificio1.getLayoutY()-jugador.getFitHeight() && edificio1.isVisible()) {
+				return true;
+			}
+		}else if(disX<107 && disX >=61) {
+			if(disY>edificio2.getLayoutY()-jugador.getFitHeight() && edificio2.isVisible()) {
+				return true;
+			}
+		}else if(disX<183 && disX >=107) {
+			if(disY>edificio3.getLayoutY()-jugador.getFitHeight() && edificio3.isVisible()) {
+				return true;
+			}
+		}else if(disX<219 && disX >=183) {
+			if(disY>edificio4.getLayoutY()-jugador.getFitHeight() && edificio4.isVisible()) {
+				return true;
+			}
+		}else if(disX<273 && disX >=219) {
+			if(disY>edificio5.getLayoutY()-jugador.getFitHeight() && edificio5.isVisible()) {
+				return true;
+			}
+		}else if(disX<340 && disX >=273) {
+			if(disY>edificio6.getLayoutY()-jugador.getFitHeight() && edificio6.isVisible()) {
+				return true;
+			}
+		}else if(disX<422 && disX >=340) {
+			if(disY>edificio7.getLayoutY()-jugador.getFitHeight() && edificio7.isVisible()) {
+				return true;
+			}
+		}else if(disX<516 && disX >=422) {
+			if(disY>edificio8.getLayoutY()-jugador.getFitHeight()+5 && edificio8.isVisible()) {
+				return true;
+			}
+		}
 		return false;
 	}
 	
