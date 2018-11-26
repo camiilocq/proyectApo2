@@ -7,7 +7,6 @@ de bombas, pero ojo que si te chocas con
 un edificio perderas.
 Debes disparar las bombas con clic sobre
 el panel del juego y destruir todo, 
-pero ojo ¡TIENES TIEMPO LIMITADO!
 --
 FACIL:
 	*8 edificios
