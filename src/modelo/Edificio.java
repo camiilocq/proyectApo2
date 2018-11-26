@@ -18,11 +18,6 @@ public class Edificio extends Ente {
 		this.tipo = tipo;
 	}
 
-	@Override
-	public boolean isMovible() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 		
 
 }

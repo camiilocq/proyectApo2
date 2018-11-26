@@ -79,12 +79,7 @@ public class Avion extends Ente {
 		this.puntuacion = puntuacion;
 	}
 
-	@Override
-	public boolean isMovible() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	
 	public Avion getDer() {
 		return der;
 	}

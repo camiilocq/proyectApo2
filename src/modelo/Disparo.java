@@ -17,11 +17,6 @@ public class Disparo extends Ente {
 		this.activo = activo;
 	}
 
-	@Override
-	public boolean isMovible() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	
 	
 }
