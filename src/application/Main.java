@@ -1,5 +1,7 @@
 package application;
 	
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -8,6 +10,7 @@ import modelo.Disparo;
 import modelo.Edificio;
 import modelo.Nivel;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 
@@ -15,6 +18,7 @@ public class Main extends Application {
 	
 	private static Nivel nivel;
 	
+
 	/**
 	 * Comentario
 	 */
@@ -37,6 +41,7 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) {
+		
 		try {
 			Pane root = (Pane)FXMLLoader.load(getClass().getResource("Inicio.fxml"));
 			Scene scene = new Scene(root);
@@ -63,4 +68,7 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
+
+
+
 }

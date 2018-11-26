@@ -1,7 +1,6 @@
 package application;
 import java.io.IOException;
 
-import hilos.HiloDisparo;
 import hilos.HiloPuntuacion;
 import hilos.HiloTiempo;
 import javafx.animation.Animation;
@@ -28,6 +27,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import modelo.Avion;
+import modelo.Disparo;
 
 public class CampoJuegoController {
 	
@@ -58,7 +58,7 @@ public class CampoJuegoController {
 	
 	private boolean control;
 	private boolean juego;
-	private HiloDisparo hDisparo;
+	
 	private HiloTiempo hTiempo;
 	private HiloPuntuacion hPuntuacion;
 	private Timeline animation;
@@ -67,52 +67,79 @@ public class CampoJuegoController {
 	
 	public void initialize() {
 		juga = Main.getNivel().getJugador();
-		tiempo.setText("000");
-		nomJugador.setText(juga.getNombre().toUpperCase());
-		juego = true; 
+		//======================================================================================
+		//						INICIO EL HILO
+		//======================================================================================
 		hTiempo = new HiloTiempo(juga,this);
 		hPuntuacion = new HiloPuntuacion(juga, this);
-		hDisparo = new HiloDisparo(juga.getDisparo(), this);
-		disparo.setVisible(false);
+		//======================================================================================
+		//						OTRAS VARIABLES
+		//======================================================================================
 		
+		nomJugador.setText(juga.getNombre().toUpperCase());
+		juego = true; 
+		disparo.setVisible(false);
+		juga.getDisparo().setPosX(juga.getPosX());
+		juga.getDisparo().setPosY(juga.getPosY());
 		
 		animation = new Timeline(new KeyFrame(Duration.millis(juga.getVelocidad()), new EventHandler<ActionEvent>() {
 			
 			int dx = 5;
 			@Override
 			public void handle(ActionEvent a) {
+				//======================================================================================
+				//						controlo puntaje y tiempo
+				//======================================================================================
 				tiempo.setText(juga.getTiempo()+"");
 				puntuacion.setText(juga.getPuntuacion()+"");
+				//======================================================================================
+				//						controlo posicion del avion
+				//======================================================================================
 				juga.setPosX(juga.getPosX()+dx);
 				jugador.setLayoutX(juga.getPosX());
 				jugador.setLayoutY(juga.getPosY());
-				
+		
 				if(juga.getPosX()>= (pane.getWidth()-jugador.getFitWidth()*0.9)) {
 					juga.setPosX(0);
 					juga.setPosY(juga.getPosY()+30);
 				}
 				
-				if(juga.getDisparo().getPosY()>pane.getHeight()) {
-					control = false;
+				if(verificar()) {
+					Alert mensaje = new Alert(AlertType.INFORMATION, "Tu avion choco, tienes un puntaje de: "+puntuacion.getText()+" y un tiempo de: "+tiempo.getText()+" seg.", ButtonType.OK);
+					animation.stop();
+					mensaje.show();
+//					guardar()
 				}
 				
-				if(verificar()) {
-					Alert mensaje = new Alert(AlertType.INFORMATION, "chocaste", ButtonType.OK);
-					mensaje.show();
+				//======================================================================================
+				//						controlo el disparo
+				//======================================================================================
+				
+				disparo.setLayoutX(juga.getDisparo().getPosX());
+				disparo.setLayoutY(juga.getDisparo().getPosY());
+				
+				if(juga.getDisparo().getPosY()>pane.getHeight()*0.8) {
+					juga.getDisparo().setActivo(false);
+					disparo.setVisible(false);
+				}
+				if(juga.getDisparo().isActivo()) {
+					juga.getDisparo().setPosY(juga.getDisparo().getPosY()+4);
+				}
+				if(impacto()) {
+					disparo.setVisible(false);
+					juga.getDisparo().setPosX(juga.getPosX());
+					juga.getDisparo().setPosY(juga.getPosY());
+					juga.getDisparo().setActivo(false);
 				}
 				fondo.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 					@Override
 					public void handle(MouseEvent arg0) {
-						if(control == false) {
-							juga.getDisparo().setPosX(jugador.getLayoutX()+50);
-							juga.getDisparo().setPosY(jugador.getLayoutY()+70);
-							disparo.setLayoutX(juga.getDisparo().getPosX());
-							disparo.setLayoutY(juga.getDisparo().getPosY());
-							disparo.setVisible(true);
-							hDisparo.start();
+						if(juga.getDisparo().isActivo()==false) {
+						juga.getDisparo().setActivo(true);
+						disparo.setVisible(true);
 						}else {
-							System.out.println("No se puede");
+							System.out.println("aun no");
 						}
 					}
 				});
@@ -126,6 +153,54 @@ public class CampoJuegoController {
 		hPuntuacion.start();
 	}
 	
+	public boolean impacto() {
+		boolean retorno = false;
+		double posX = juga.getDisparo().getPosX();
+		double posY = juga.getDisparo().getPosY();
+		if(edificio1.getLayoutX()<=posX && posX<=edificio1.getLayoutX()+edificio1.getFitWidth()) {
+			if((edificio1.getLayoutY()+edificio1.getFitHeight())-posY<=10) {
+			edificio1.setVisible(false);
+			retorno = true;
+			}
+		}else if(edificio2.getLayoutX()<=posX && posX<=edificio2.getLayoutX()+edificio2.getFitWidth()) {
+			if((edificio2.getLayoutY()+edificio2.getFitHeight())-posY<=10) {
+			edificio2.setVisible(false);
+			retorno = true;
+			}
+		}else if(edificio3.getLayoutX()<=posX && posX<=edificio3.getLayoutX()+edificio3.getFitWidth()) {
+			if((edificio3.getLayoutY()+edificio3.getFitHeight())-posY<=10) {
+			edificio3.setVisible(false);
+			retorno = true;
+			}
+		}else if(edificio4.getLayoutX()<=posX && posX<=edificio4.getLayoutX()+edificio4.getFitWidth()) {
+			if((edificio4.getLayoutY()+edificio4.getFitHeight())-posY<=10) {
+			edificio4.setVisible(false);
+			retorno = true;
+			}
+		}else if(edificio5.getLayoutX()<=posX && posX<=edificio5.getLayoutX()+edificio5.getFitWidth()) {
+			if((edificio5.getLayoutY()+edificio5.getFitHeight())-posY<=10) {
+			edificio5.setVisible(false);
+			retorno = true;
+			}
+		}else if(edificio6.getLayoutX()<=posX && posX<=edificio6.getLayoutX()+edificio6.getFitWidth()) {
+			if((edificio6.getLayoutY()+edificio6.getFitHeight())-posY<=10) {
+			edificio6.setVisible(false);
+			retorno = true;
+			}
+		}else if(edificio7.getLayoutX()<=posX && posX<=edificio7.getLayoutX()+edificio7.getFitWidth()) {
+			if((edificio7.getLayoutY()+edificio7.getFitHeight())-posY<=10) {
+			edificio7.setVisible(false);
+			retorno = true;
+			}
+		}else if(edificio8.getLayoutX()<=posX && posX<=edificio8.getLayoutX()+edificio8.getFitWidth()) {
+			if((edificio8.getLayoutY()+edificio8.getFitHeight())-posY<=10) {
+			edificio8.setVisible(false);
+			retorno = true;
+			}
+		}
+		return retorno;
+	}
+
 	public boolean isControl() {
 		return control;
 	}
