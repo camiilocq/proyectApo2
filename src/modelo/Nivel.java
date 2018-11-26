@@ -7,12 +7,14 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import excepcion.AvionNoExisteException;
 import excepcion.AvionRepetidoException;
 
 public class Nivel {
 
 	private Edificio[] edificio;
 	private Avion jugador;
+	private int numAviones;
 	
 	public Nivel(Edificio[] edificio, Avion jugador) {
 		this.edificio = edificio;
@@ -48,7 +50,7 @@ public class Nivel {
 		
 	}
 	
-	public Avion leerConNombre(String nombre)throws NullPointerException{
+	public Avion leerConNombre(String nombre)throws NullPointerException, AvionNoExisteException{
 		Avion a = null;
 		try {
 			File file = new File("archivos/jugadores.data");
@@ -66,7 +68,21 @@ public class Nivel {
 		
 	}
 	
-	public Avion buscar(String nombre)throws NullPointerException {
+	public void leer() {
+		try {
+			File file = new File("archivos/jugadores.data");
+			FileInputStream bs= new FileInputStream(file);
+			ObjectInputStream os = new ObjectInputStream (bs);
+			jugador = (Avion) os.readObject();
+			os.close();
+			bs.close();
+		}catch(ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public Avion buscar(String nombre)throws NullPointerException, AvionNoExisteException {
 		if(jugador.getNombre().compareToIgnoreCase(nombre)==0) {
 			return jugador;
 		}else {
@@ -77,13 +93,21 @@ public class Nivel {
 	public void agregar(Avion a) {
 		if(jugador == null) {
 			jugador = a;
+			setNumAviones(getNumAviones()+1);
 		}else {
 			try {
 				jugador.insertar(a);
+				setNumAviones(getNumAviones()+1);
 			} catch (AvionRepetidoException e) {
 				e.printStackTrace();
 			}
 		}
+	}
+	public int getNumAviones() {
+		return numAviones;
+	}
+	public void setNumAviones(int numAviones) {
+		this.numAviones = numAviones;
 	}
 
 	

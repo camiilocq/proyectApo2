@@ -2,6 +2,7 @@ package application;
 
 import java.io.IOException;
 
+import excepcion.AvionNoExisteException;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+import modelo.Avion;
 
 public class JugadoresController {
 
@@ -31,25 +33,74 @@ public class JugadoresController {
 	
 	public void initialize() {
 		lisJugadores.setEditable(false);
+		loadJugadores();
 	}
 	
 	public void buscar() {
-		Alert alert = new Alert(AlertType.INFORMATION, "AQUI DEBE APARECER LA INFORMACION DEL JUGADOR", ButtonType.OK, ButtonType.CANCEL);
+		String dificultad = "";
+		if(criterio.getText()!=null) {
+			try {
+			Avion a = Main.getNivel().buscar(criterio.getText());
+			if(a.getVelocidad()==35) {
+				dificultad = "FACIL";
+		}else if(a.getVelocidad()  == 30) {
+			dificultad = "INTERMEDIO";
+		}else if(a.getVelocidad() == 25) {
+			dificultad = "DIFICIL";
+		}
+		Alert alert = new Alert(AlertType.INFORMATION, "Jugador: "+a.getNombre().toUpperCase()+" con una puntuacion de: "+a.getPuntuacion()+
+				" y un tiempo de: "+a.getTiempo()+" segundos en la dificultad de: "+dificultad, ButtonType.OK);
 		alert.showAndWait();	
+			}catch(AvionNoExisteException e) {
+				Alert alert = new Alert(AlertType.INFORMATION, e.getMessage(), ButtonType.OK, ButtonType.CANCEL);
+				alert.showAndWait();
+			}
+		}else {
+			Alert alert = new Alert(AlertType.INFORMATION, "INGRESE EL NOMBRE DEL JUGADOR", ButtonType.OK, ButtonType.CANCEL);
+			alert.showAndWait();	
+		}
 	}
 	
 	public void primero() {
-		Alert alert = new Alert(AlertType.INFORMATION, "AQUI DEBE APARECER LA INFORMACION DEL PRIMER JUGADOR", ButtonType.OK, ButtonType.CANCEL);
+		loadJugadores();
+		String dificultad = "default";
+		Avion a = Main.getNivel().getJugador().darMayor();
+	
+		if(a.getVelocidad()==35) {
+			dificultad = "FACIL";
+		}else if(a.getVelocidad()  == 30) {
+			dificultad = "INTERMEDIO";
+		}else if(a.getVelocidad() == 25) {
+			dificultad = "DIFICIL";
+		}
+		Alert alert = new Alert(AlertType.INFORMATION, "Jugador: "+a.getNombre().toUpperCase()+" con una puntuacion de: "+a.getPuntuacion()+
+				" y un tiempo de: "+a.getTiempo()+" segundos en la dificultad de: "+dificultad, ButtonType.OK);
 		alert.showAndWait();	
-	}
+		}
+		
 	
 	public void ultimo() {
-		Alert alert = new Alert(AlertType.INFORMATION, "AQUI DEBE APARECER LA INFORMACION DE LOS ULTIMOS JUGADOR", ButtonType.OK, ButtonType.CANCEL);
-		alert.showAndWait();	
-	}
+		loadJugadores();
+		String dificultad = "default";
+		Avion a = Main.getNivel().getJugador().darMenor();
 	
+		if(a.getVelocidad()==35) {
+			dificultad = "FACIL";
+		}else if(a.getVelocidad()  == 30) {
+			dificultad = "INTERMEDIO";
+		}else if(a.getVelocidad() == 25) {
+			dificultad = "DIFICIL";
+		}
+		Alert alert = new Alert(AlertType.INFORMATION, "Jugador: "+a.getNombre().toUpperCase()+" con una puntuacion de: "+a.getPuntuacion()+
+				" y un tiempo de: "+a.getTiempo()+" segundos en la dificultad de: "+dificultad, ButtonType.OK);
+		alert.showAndWait();	
+		}
+		
+	public void loadJugadores() {
+		Main.getNivel().leer();
+	}
 	public void totalJugadores() {
-		Alert alert = new Alert(AlertType.INFORMATION, "AQUI DEBE APARECER EL NUMERO DE JUGADORES QUE HAY", ButtonType.OK, ButtonType.CANCEL);
+		Alert alert = new Alert(AlertType.INFORMATION, "HAY "+Main.getNivel().getNumAviones()+" AVION(ES)", ButtonType.OK);
 		alert.showAndWait();	
 	}
 	

@@ -1,18 +1,16 @@
 package modelo;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Collection;
 
+import excepcion.AvionNoExisteException;
 import excepcion.AvionRepetidoException;
 
 public class Avion extends Ente {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int puntuacion;
 	private Avion der;
 	private Avion izq;
@@ -94,7 +92,7 @@ public class Avion extends Ente {
 		this.tiempo = tiempo;
 	}
 
-	public Avion buscar(String nombre) {
+	public Avion buscar(String nombre) throws AvionNoExisteException{
 		if(nombre.compareToIgnoreCase(nombre)==0) {
 			return this;
 		}else if(nombre.compareToIgnoreCase(nombre)>0) {
@@ -133,11 +131,19 @@ public class Avion extends Ente {
 
 	}
 	
-	 public int compareTo( Object o )
-	    {
+	 public int compareTo( Object o ){
 	        Avion otro = ( Avion )o;
 	        return nombre.compareToIgnoreCase( otro.nombre );
-	    }
+	 }
+	 
+	 public Avion darMenor( ){
+	        return ( izq == null ) ? this : izq.darMenor( );
+	 }
+	 
+	 public Avion darMayor( ){
+	        return ( der == null ) ? this : der.darMayor( );
+	  }
+
 	
 	 public void insertar( Avion nuevo ) throws AvionRepetidoException{
 	    	if(compareTo(nuevo)==0) {

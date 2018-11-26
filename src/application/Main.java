@@ -2,6 +2,7 @@ package application;
 	
 import java.io.IOException;
 
+import excepcion.AvionNoExisteException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -24,9 +25,7 @@ public class Main extends Application {
 	 */
 	
 	public Main() {
-		Avion av1 = new Avion(10, 0, "Jhonnier", 100,null, 0, 0);
-		Avion av2 = new Avion(25, 0, "Camilo", 150,null, 0, 0);
-		Avion av3 = new Avion(5, 0, "Default", 50,null, 0, 0);
+		
 		Edificio[] edificios = new Edificio[10];
 		edificios[1] = new Edificio(-14,392);
 		edificios[2] = new Edificio(43,300);
@@ -39,9 +38,7 @@ public class Main extends Application {
 		edificios[9] = new Edificio(432,300);
 				
 		setNivel(new Nivel(edificios,null));
-		nivel.agregar(av1);
-		nivel.agregar(av2);
-		nivel.agregar(av3);
+		
 		
 	}
 	
@@ -60,7 +57,12 @@ public class Main extends Application {
 	}
 	
 	public Avion buscar(String nombre) {
-		return nivel.buscar(nombre);
+		try {
+			return nivel.buscar(nombre);
+		} catch (NullPointerException | AvionNoExisteException e) {
+			System.out.println(e.getMessage());
+		}
+		return null;
 	}
 
 	public static Nivel getNivel() {

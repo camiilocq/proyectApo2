@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import excepcion.AvionNoExisteException;
 import modelo.Avion;
 import modelo.Nivel;
 
@@ -26,7 +27,12 @@ class TestNivel {
 	@Test
 	public void BuscarTest() {
 		escenario1();
-		Avion esperado = nivel.buscar("Camilo");
+		Avion esperado = null;
+		try {
+			esperado = nivel.buscar("Camilo");
+		} catch (NullPointerException | AvionNoExisteException e) {
+			System.out.println(e.getMessage());
+		}
 		assertEquals(esperado.getNombre(), "Camilo");
 	}
 
@@ -34,6 +40,11 @@ class TestNivel {
 	public void AgregarTest() {
 		escenario2();
 		nivel.agregar(new Avion(10, 0, "Jhonnier", 100, null, 10, 10));
-		assertEquals(nivel.getJugador(), nivel.buscar("Jhonnier"));
+		try {
+			assertEquals(nivel.getJugador(), nivel.buscar("Jhonnier"));
+		} catch (NullPointerException | AvionNoExisteException e) {
+			System.out.println(e.getMessage());
+		}
 	}
+	
 }

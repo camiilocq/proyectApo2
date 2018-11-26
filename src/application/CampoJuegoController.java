@@ -1,6 +1,7 @@
 package application;
 import java.io.IOException;
 
+import excepcion.AvionNoExisteException;
 import hilos.HiloPuntuacion;
 import hilos.HiloTiempo;
 import javafx.animation.Animation;
@@ -11,7 +12,6 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.HPos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -22,12 +22,11 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import modelo.Avion;
-import modelo.Disparo;
+
 
 public class CampoJuegoController {
 	
@@ -67,7 +66,7 @@ public class CampoJuegoController {
 	private Avion juga;
 	
 	public void initialize() {
-		juga = Main.getNivel().getJugador();
+		juga = Main.getNivel().getJugador().darMenor();
 		//======================================================================================
 		//						INICIO EL HILO
 		//======================================================================================
@@ -299,8 +298,16 @@ public class CampoJuegoController {
 	}
 	
 	public void guardar(Event event){
-		Main.getNivel().buscar(juga.getNombre()).setPuntuacion(Integer.parseInt(puntuacion.getText()));
-		Main.getNivel().buscar(juga.getNombre()).setTiempo(Integer.parseInt(tiempo.getText()));
+		try {
+			Main.getNivel().buscar(juga.getNombre()).setPuntuacion(Integer.parseInt(puntuacion.getText()));
+		} catch (NumberFormatException | NullPointerException | AvionNoExisteException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			Main.getNivel().buscar(juga.getNombre()).setTiempo(Integer.parseInt(tiempo.getText()));
+		} catch (NumberFormatException | NullPointerException | AvionNoExisteException e1) {
+			e1.printStackTrace();
+		}
 		Main.getNivel().guardar();
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("Jugadores.fxml"));
