@@ -3,8 +3,6 @@ package modelo;
 
 import java.io.Serializable;
 
-import interfaces.Movible;
-
 public abstract class Ente implements Serializable {
 	private double posX;
 	private double posY;

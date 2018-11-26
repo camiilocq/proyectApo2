@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import excepcion.AvionRepetidoException;
-import interfaces.Disparable;
 
 public class Avion extends Ente {
 	

@@ -13,13 +13,27 @@ class TestNivel {
 
 	public void escenario1() {
 		Avion a = new Avion(10, 0, "Camilo", 100, null, 10, 10);
+		Avion b = new Avion(10, 0, "Jhonnier", 100, null, 10, 10);
 		nivel = new Nivel(null, null);
-		nivel.
+		nivel.agregar(a);
+		nivel.agregar(b);
+	}
+	
+	public void escenario2() {
+		nivel = new Nivel(null, null);
 	}
 	
 	@Test
-	void test() {
-		fail("Not yet implemented");
+	public void BuscarTest() {
+		escenario1();
+		Avion esperado = nivel.buscar("Camilo");
+		assertEquals(esperado.getNombre(), "Camilo");
 	}
 
+	@Test
+	public void AgregarTest() {
+		escenario2();
+		nivel.agregar(new Avion(10, 0, "Jhonnier", 100, null, 10, 10));
+		assertEquals(nivel.getJugador(), nivel.buscar("Jhonnier"));
+	}
 }

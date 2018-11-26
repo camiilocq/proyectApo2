@@ -108,7 +108,7 @@ public class CampoJuegoController {
 					Alert mensaje = new Alert(AlertType.INFORMATION, "Tu avion choco, tienes un puntaje de: "+puntuacion.getText()+" y un tiempo de: "+tiempo.getText()+" seg.", ButtonType.OK);
 					mensaje.setHeaderText(juga.getNombre().toUpperCase());
 					animation.stop();
-					Main.getNivel().guardar(juga);
+					Main.getNivel().guardar();
 					mensaje.show();
 
 					/*
@@ -299,7 +299,9 @@ public class CampoJuegoController {
 	}
 	
 	public void guardar(Event event){
-		Main.getNivel().guardar(juga);
+		Main.getNivel().buscar(juga.getNombre()).setPuntuacion(Integer.parseInt(puntuacion.getText()));
+		Main.getNivel().buscar(juga.getNombre()).setTiempo(Integer.parseInt(tiempo.getText()));
+		Main.getNivel().guardar();
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("Jugadores.fxml"));
 			Scene scene = new Scene(root);

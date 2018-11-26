@@ -35,12 +35,12 @@ public class Nivel {
 		
 	}
 	
-	public void guardar(Avion jugador) {
+	public void guardar() {
 		try {
 		File file = new File("archivos/jugadores.data");
 		FileOutputStream bs= new FileOutputStream(file);
 		ObjectOutputStream os = new ObjectOutputStream (bs);
-		os.writeObject(jugador);  // this es de tipo DatoUdp
+		os.writeObject(jugador);
 		os.close();
 		}catch(IOException e) {
 			e.printStackTrace();
