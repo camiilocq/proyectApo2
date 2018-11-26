@@ -122,7 +122,7 @@ public class DificultadController {
 					velocidad = 25;
 				
 					int puntuacion =0;
-					Avion jugador = new Avion(1, velocidad, 0, result.get(), puntuacion, new Disparo(false,10,10), 10 ,10);
+					Avion jugador = new Avion(1, velocidad, result.get(), puntuacion, new Disparo(false,10,10), 10 ,10);
 					Main.getNivel().setJugador(jugador);		
 				try {
 					Parent root = FXMLLoader.load(getClass().getResource("CampoJuego.fxml"));

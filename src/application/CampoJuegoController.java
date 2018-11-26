@@ -106,7 +106,9 @@ public class CampoJuegoController {
 				
 				if(verificar()) {
 					Alert mensaje = new Alert(AlertType.INFORMATION, "Tu avion choco, tienes un puntaje de: "+puntuacion.getText()+" y un tiempo de: "+tiempo.getText()+" seg.", ButtonType.OK);
+					mensaje.setHeaderText(juga.getNombre().toUpperCase());
 					animation.stop();
+					Main.getNivel().guardar(juga);
 					mensaje.show();
 
 					/*

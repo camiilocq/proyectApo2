@@ -9,11 +9,11 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import excepcion.AvionRepetidoException;
 import interfaces.Disparable;
 
 public class Avion extends Ente {
 	
-	private int vida;
 	private int puntuacion;
 	private Avion der;
 	private Avion izq;
@@ -28,23 +28,14 @@ public class Avion extends Ente {
 	private String nombre;
 	
 	
-	public Avion(int tiempo, double velocidad, int vida,String nombre,int puntuacion,Disparo disparo,double posX, double posY) {
+	public Avion(int tiempo, double velocidad,String nombre,int puntuacion,Disparo disparo,double posX, double posY) {
 		super(posX,posY);
 		this.tiempo = tiempo;
 		this.disparo = disparo;
 		this.nombre = nombre;
 		this.puntuacion = puntuacion;
-		this.vida = vida;
 		this.velocidad = velocidad;
 		der = izq = null;
-	}
-
-	public int getVida() {
-		return vida;
-	}
-
-	public void setVida(int vida) {
-		this.vida = vida;
 	}
 
 	public double getVelocidad() {
@@ -142,5 +133,30 @@ public class Avion extends Ente {
 		}
 
 	}
+	
+	 public int compareTo( Object o )
+	    {
+	        Avion otro = ( Avion )o;
+	        return nombre.compareToIgnoreCase( otro.nombre );
+	    }
+	
+	 public void insertar( Avion nuevo ) throws AvionRepetidoException{
+	    	if(compareTo(nuevo)==0) {
+	    		throw new AvionRepetidoException("EL AVION YA ESTA REGISTRADO");
+	    	}
+	    	if(compareTo(nuevo)>0) {
+	    		if(izq ==null) {
+	    			izq = nuevo;
+	    		}else {
+	    			izq.insertar(nuevo);
+	    		}
+	    	}else {
+	    		if(der ==null) {
+	    			der = nuevo;
+	    		}else {
+	    			der.insertar(nuevo);
+	    		}
+	    	}
+	    }
 	
 }

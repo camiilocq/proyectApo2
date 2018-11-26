@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import excepcion.AvionRepetidoException;
+
 public class Nivel {
 
 	private Edificio[] edificio;
@@ -69,6 +71,18 @@ public class Nivel {
 			return jugador;
 		}else {
 			return jugador.buscar(nombre);
+		}
+	}
+	
+	public void agregar(Avion a) {
+		if(jugador == null) {
+			jugador = a;
+		}else {
+			try {
+				jugador.insertar(a);
+			} catch (AvionRepetidoException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
