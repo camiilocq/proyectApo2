@@ -28,7 +28,7 @@ import javafx.util.Duration;
 import modelo.Avion;
 
 /**
- *  @author Juan Camilo Castillo
+ *  * @author Juan Camilo Castillo
  * @author Jhonnier Isaza Gonzalez
  * Esta es la clase CampoJuegoController que controla el archivo CampoJuego.fxml
  */

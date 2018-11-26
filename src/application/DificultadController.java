@@ -22,7 +22,7 @@ import javafx.stage.Stage;
 import modelo.Avion;
 import modelo.Disparo;
 /**
- * @author Juan Camilo Castillo
+  * @author Juan Camilo Castillo
  * @author Jhonnier Isaza Gonzalez
  * Esta es la clase DificultadController que controla el archivo Dificultad.fxml
  */

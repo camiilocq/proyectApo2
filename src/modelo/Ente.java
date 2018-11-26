@@ -1,6 +1,5 @@
 package modelo;
 
-
 import java.io.Serializable;
 
 public abstract class Ente implements Serializable {

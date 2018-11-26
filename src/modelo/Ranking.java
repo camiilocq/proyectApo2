@@ -42,7 +42,7 @@ public class Ranking {
 		}
 	}
 	
-	private void agregarAvionLista(Avion nuevo, Avion anterior, Avion siguiente) {
+	public void agregarAvionLista(Avion nuevo, Avion anterior, Avion siguiente) {
 		if(siguiente == null) {
 			anterior.setNext(nuevo);
 		} else {
@@ -63,7 +63,7 @@ public class Ranking {
 		}
 	}
 
-	private void agregarAvionArbol(Avion nuevo, Avion actual) {
+	public void agregarAvionArbol(Avion nuevo, Avion actual) {
 		if(actual.compareTo(nuevo.getNombre()) <= 0) {
 			if(actual.getDer() == null) {
 				actual.setDer(nuevo);
@@ -83,7 +83,7 @@ public class Ranking {
 		return buscarAvionArbol(nombre, raiz);
 	}
 	
-	private Avion buscarAvionArbol(String nombre, Avion actual) {
+	public Avion buscarAvionArbol(String nombre, Avion actual) {
 		if(actual != null) {
 			if(actual.compareTo(nombre) == 0) {
 				return actual;
@@ -136,7 +136,7 @@ public class Ranking {
 		return firstAvion;
 	}
 	
-	private ArrayList<Avion> listaJugadores() {
+	public ArrayList<Avion> listaJugadores() {
 		if(raiz == null) {
 			return null;
 		} else {
@@ -190,7 +190,7 @@ public class Ranking {
 		
 	}
 	
-	private int busquedaBinariaPorNombre(String nombre) {
+	public int busquedaBinariaPorNombre(String nombre) {
 		if(raiz == null) {
 			return -1;
 		} else {
