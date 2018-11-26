@@ -90,14 +90,19 @@ public class Nivel {
 		}
 	}
 	
+	  public void eliminarProgramador( String nombre ){
+	       jugador = jugador.eliminar( nombre );
+	       numAviones--;
+	  }
+	
 	public void agregar(Avion a) {
 		if(jugador == null) {
 			jugador = a;
-			setNumAviones(getNumAviones()+1);
+			numAviones++;
 		}else {
 			try {
 				jugador.insertar(a);
-				setNumAviones(getNumAviones()+1);
+				numAviones++;
 			} catch (AvionRepetidoException e) {
 				e.printStackTrace();
 			}

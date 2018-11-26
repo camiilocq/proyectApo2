@@ -142,7 +142,35 @@ public class Avion extends Ente {
 	 
 	 public Avion darMayor( ){
 	        return ( der == null ) ? this : der.darMayor( );
-	  }
+	 }
+	 
+	 public boolean esHoja( ){
+	    return izq == null && der == null;
+	 }
+
+	 public Avion eliminar( String unNombre )
+	    {
+	     if(esHoja()) {
+	    	 return null;
+	     } if(nombre.compareToIgnoreCase(unNombre)==0) {
+	    	 if(izq == null) {
+	    		 return der;
+	    	 }if(der == null) {
+	    		 return izq;
+	    	 }		 
+	    	Avion temp = der.darMenor();
+	    	 der = der.eliminar(temp.getNombre());
+	    	 temp.izq = izq;
+	    	 temp.der = der;
+	    	 return temp;
+	     }
+	     else if(nombre.compareToIgnoreCase(unNombre)>0) {
+	    	 izq = izq.eliminar(unNombre);
+	     } else {
+	    	 der = der.eliminar(unNombre);
+	    }
+	     return this;
+	    }
 
 	
 	 public void insertar( Avion nuevo ) throws AvionRepetidoException{

@@ -25,28 +25,18 @@ public class AyudaController {
 	
 	
 	public void initialize() {
-		File file = null;
-		FileReader fr = null;
-		BufferedReader bf = null;
+		String texto = "";
 		try {
-			 file = new File("archivos/AyudaFile.txt");
-			 fr = new FileReader(file);
-			 bf = new BufferedReader(fr);
-
-			while((bf.readLine())!=null){
-				ayuda.setText(bf.readLine());
+			File file = new File("archivos/AyudaFile.txt");
+			FileReader fr = new FileReader(file);
+			BufferedReader bf = new BufferedReader(fr);
+			while((texto = bf.readLine())!=null) {
+				ayuda.setText(ayuda.getText()+texto+"\n");
 			}
-			
+			bf.close();
 		}catch(IOException e) {
-			Alert alert = new Alert(AlertType.ERROR, e.getMessage(), ButtonType.OK);
-			alert.showAndWait();	
-		}finally {
-			try {
-				bf.close();
-				fr.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			
+			e.printStackTrace();
 		}
 	}
 	

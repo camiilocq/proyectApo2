@@ -14,10 +14,8 @@ class TestNivel {
 
 	public void escenario1() {
 		Avion a = new Avion(10, 0, "Camilo", 100, null, 10, 10);
-		Avion b = new Avion(10, 0, "Jhonnier", 100, null, 10, 10);
 		nivel = new Nivel(null, null);
 		nivel.agregar(a);
-		nivel.agregar(b);
 	}
 	
 	public void escenario2() {
@@ -45,6 +43,13 @@ class TestNivel {
 		} catch (NullPointerException | AvionNoExisteException e) {
 			System.out.println(e.getMessage());
 		}
+	}
+	
+	@Test
+	public void eliminarTest() {
+		escenario1();
+		nivel.eliminarProgramador("Camilo");
+		assertEquals(nivel.getJugador(), null);
 	}
 	
 }

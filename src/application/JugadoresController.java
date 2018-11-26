@@ -36,6 +36,9 @@ public class JugadoresController {
 		loadJugadores();
 	}
 	
+	public void mostrar() {
+		
+	}
 	public void buscar() {
 		String dificultad = "";
 		if(criterio.getText()!=null) {
