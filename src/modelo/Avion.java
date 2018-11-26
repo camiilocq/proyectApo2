@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import interfaces.Disparable;
 
@@ -15,6 +17,7 @@ public class Avion extends Ente {
 	private int puntuacion;
 	private Avion der;
 	private Avion izq;
+	private int tiempo;
 	
 	private Avion next;
 	
@@ -25,8 +28,9 @@ public class Avion extends Ente {
 	private String nombre;
 	
 	
-	public Avion(double velocidad, int vida,String nombre,int puntuacion,Disparo disparo,double posX, double posY) {
+	public Avion(int tiempo, double velocidad, int vida,String nombre,int puntuacion,Disparo disparo,double posX, double posY) {
 		super(posX,posY);
+		this.tiempo = tiempo;
 		this.disparo = disparo;
 		this.nombre = nombre;
 		this.puntuacion = puntuacion;
@@ -97,6 +101,14 @@ public class Avion extends Ente {
 		this.izq = izq;
 	}
 	
+	public int getTiempo() {
+		return tiempo;
+	}
+
+	public void setTiempo(int tiempo) {
+		this.tiempo = tiempo;
+	}
+
 	public Avion buscar(String nombre) {
 		if(nombre.compareToIgnoreCase(nombre)==0) {
 			return this;
@@ -123,6 +135,17 @@ public class Avion extends Ente {
 
 	public void setNext(Avion next) {
 		this.next = next;
+	}
+	
+	public void inOrden(ArrayList<Avion> acumulado) {
+		if (this.izq != null) {
+			izq.inOrden(acumulado);
+		}
+		acumulado.add(this);
+		if (this.der != null) {
+			der.inOrden(acumulado);
+		}
+
 	}
 	
 }

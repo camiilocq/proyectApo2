@@ -1,5 +1,8 @@
 package modelo;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 public class Ranking {
 
 	private Avion firstAvion;
@@ -113,6 +116,125 @@ public class Ranking {
 			}
 		}
 		return actual;
+	}
+	
+	public Avion ultimoJugador() {
+		Avion toReturn = null;
+		if(firstAvion != null) {
+			if(firstAvion.getNext() == null) {
+				return firstAvion;
+			} else {
+				toReturn = firstAvion.getNext();
+				while(toReturn.getNext() != null) {
+					toReturn = toReturn.getNext();
+				}
+			}
+		}
+		return toReturn;
+	}
+	
+	public Avion primerJugador() {
+		return firstAvion;
+	}
+	
+	private ArrayList<Avion> listaJugadores() {
+		if(raiz == null) {
+			return null;
+		} else {
+			ArrayList<Avion> lista = new ArrayList<Avion>();
+			raiz.inOrden(lista);
+			return lista;
+		}
+	}
+	
+	public ArrayList<Avion> ordenarPorNombre() {
+		if(raiz == null) {
+			return null;
+		} else {
+			ArrayList<Avion> lista = listaJugadores();
+			for(int i = 1; i < lista.size(); i++) {
+				for(int j = i; j > 0 && lista.get(j-1).compareTo(lista.get(j).getNombre()) > 0; j--) {
+					Avion a = lista.get(j-1);
+					lista.remove(j-1);
+					lista.add(j-1, lista.get(j));
+					lista.remove(j);
+					lista.add(j, a);
+				}
+			}
+			return lista;
+		}
+		
+	}
+	
+	public ArrayList<Avion> ordenarPorPuntos() {
+		if(raiz == null) {
+			return null;
+		} else {
+			ArrayList<Avion> lista = listaJugadores();
+			for(int i = 0; i < lista.size()-1; i++) {
+				Avion menor = lista.get(i);
+				int cual = i;
+				for(int j = i+1; j < lista.size(); j++) {
+					if(lista.get(j).compareTo(menor.getNombre()) < 0) {
+						menor = lista.get(j);
+						cual = j;
+					}
+				}
+				Avion a = lista.get(i);
+				lista.remove(i);
+				lista.add(i, menor);
+				lista.remove(cual);
+				lista.add(cual, a);
+			}
+			return lista;
+		}
+		
+	}
+	
+	private int busquedaBinariaPorNombre(String nombre) {
+		if(raiz == null) {
+			return -1;
+		} else {
+			ArrayList<Avion> lista = ordenarPorNombre();
+			int inicio = 0, fin = lista.size()-1, pos = -1, medio;
+			boolean finish = false;
+			while(!finish && inicio <= fin) {
+				medio = (fin - inicio)/2;
+				if(lista.get(medio).compareTo(nombre) == 0) {
+					pos = medio;
+					finish = true;
+				} else if(lista.get(medio).compareTo(nombre) > 0) {
+					fin = medio-1;
+				} else {
+					inicio = medio+1;
+				}
+			}
+			return pos;
+		}
+	}
+	
+	public Avion buscarPorNombre(String nombre) {
+		if(raiz == null) {
+			return null;
+		} else {
+			ArrayList<Avion> lista = ordenarPorNombre();
+			int pos = busquedaBinariaPorNombre(nombre);
+			if(pos == -1) {
+				return null;
+			} else {
+				return lista.get(pos);
+			}
+		}
+	}
+	
+	public ArrayList<Avion> TotalJugadores() {
+		if(raiz == null) {
+			return null;
+		} else {
+			ArrayList<Avion> lista = new ArrayList<Avion>();
+			raiz.inOrden(lista);
+			return lista;
+		}
 	}
 	
 }
