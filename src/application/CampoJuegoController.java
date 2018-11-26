@@ -28,6 +28,8 @@ import javafx.util.Duration;
 import modelo.Avion;
 
 /**
+ *  @author Juan Camilo Castillo
+ * @author Jhonnier Isaza Gonzalez
  * Esta es la clase CampoJuegoController que controla el archivo CampoJuego.fxml
  */
 public class CampoJuegoController {
@@ -168,6 +170,7 @@ public class CampoJuegoController {
 					animation.stop();
 					Main.getNivel().guardar();
 					mensaje.show();
+					animation.stop();
 
 					/*
 					 * falta por modificar
@@ -219,6 +222,11 @@ public class CampoJuegoController {
 		hPuntuacion.start();
 	}
 	
+	/**
+	 * Avion!=null y Disparo!=null
+     * metodo que permite verificar si el misil impacto en un edificio
+     * @return retorno - boleano que simboliza si impacto o no el misil
+     */
 	public boolean impacto() {
 		boolean retorno = false;
 		double disY = juga.getDisparo().getPosY()+misil.getFitWidth();
@@ -267,23 +275,40 @@ public class CampoJuegoController {
 		return retorno;
 	}
 
-
+	/**
+	 * animacion!=null
+     * metodo que permite verificar si la animacion esta corrriendo
+     * @return retorno - boleano que simboliza si la animacion esta o no corriendo
+     */
 	public boolean isJuego() {
+		boolean retorno = false;
 		if(animation.getStatus().equals(Animation.Status.RUNNING)) {
-			return true;
+			retorno = true;
+			return retorno;
 		}else{
-			return false;
+			return retorno;
 		}
 	}
 	
+	/**
+     * metodo que dar la etiqueta con el tiempo
+     * @return tiempo - etiqueta que simboliza el tiempo
+     */
 	public Label getTiempo() {
 		return tiempo;
 	}
-
+	
+	/**
+     * metodo que permite modificar la etiqueta con el tiempo
+     * @param tiempo -  etiqueta que simboliza el nuevo tiempo 
+     */
 	public void setTiempo(Label tiempo) {
 		this.tiempo = tiempo;
 	}
 	
+	/**
+     * metodo que permite pausar la animacion o reanudarla
+     */
 	public void pausar() {
 	if(animation.getStatus().equals(Animation.Status.RUNNING)) {
 		animation.stop();
@@ -298,6 +323,9 @@ public class CampoJuegoController {
 	}
 	}
 	
+	/**
+     * metodo que permite reiniciar la animacion desde el principio
+     */
 	public void reiniciar() {
 		juga.setPosX(0);
 		juga.setPosY(0);
@@ -305,47 +333,55 @@ public class CampoJuegoController {
 		juga.setTiempo(0);
 	}
 	
-	
+	/**
+     * metodo que permite verificar si el avon a chocado contra un edificio o no
+     * @return control - boleano que simboliza si choco o no el avion
+     */
 	public boolean verificar(){
+		boolean control = true;
 		double disY = jugador.getLayoutY()-10;
 		double disX = jugador.getLayoutX()-jugador.getFitWidth();
 		if(disX<61) {
 			if(disY>edificio1.getLayoutY()-jugador.getFitHeight() && edificio1.isVisible()) {
-				return true;
+				return control;
 			}
 		}else if(disX<107 && disX >=61) {
 			if(disY>edificio2.getLayoutY()-jugador.getFitHeight() && edificio2.isVisible()) {
-				return true;
+				return control;
 			}
 		}else if(disX<183 && disX >=107) {
 			if(disY>edificio3.getLayoutY()-jugador.getFitHeight() && edificio3.isVisible()) {
-				return true;
+				return control;
 			}
 		}else if(disX<219 && disX >=183) {
 			if(disY>edificio4.getLayoutY()-jugador.getFitHeight() && edificio4.isVisible()) {
-				return true;
+				return control;
 			}
 		}else if(disX<273 && disX >=219) {
 			if(disY>edificio5.getLayoutY()-jugador.getFitHeight() && edificio5.isVisible()) {
-				return true;
+				return control;
 			}
 		}else if(disX<340 && disX >=273) {
 			if(disY>edificio6.getLayoutY()-jugador.getFitHeight() && edificio6.isVisible()) {
-				return true;
+				return control;
 			}
 		}else if(disX<422 && disX >=340) {
 			if(disY>edificio7.getLayoutY()-jugador.getFitHeight() && edificio7.isVisible()) {
-				return true;
+				return control;
 			}
 		}else if(disX<516 && disX >=422) {
 			if(disY>edificio8.getLayoutY()-jugador.getFitHeight()+5 && edificio8.isVisible()) {
-				return true;
+				return control;
 			}
 		}
-		return false;
+		return !control;
 	}
 	
+	/**
+     * metodo que permite guardar el jugador y llevar al usuario a la ventana con el ranking
+     */
 	public void guardar(Event event){
+		animation.stop();
 		try {
 			Main.getNivel().buscar(juga.getNombre()).setPuntuacion(Integer.parseInt(puntuacion.getText()));
 		} catch (NumberFormatException | NullPointerException | AvionNoExisteException e1) {

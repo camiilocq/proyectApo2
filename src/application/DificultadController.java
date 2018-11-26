@@ -21,22 +21,51 @@ import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
 import modelo.Avion;
 import modelo.Disparo;
-
+/**
+ * @author Juan Camilo Castillo
+ * @author Jhonnier Isaza Gonzalez
+ * Esta es la clase DificultadController que controla el archivo Dificultad.fxml
+ */
 public class DificultadController {
 
+	/**
+     * boton que permite escoger el nivel facil
+     */
 	@FXML private Button facil;
+	/**
+     * boton que permite escoger el nivel intermedio
+     */
 	@FXML private Button intermedio;
+	/**
+     * boton que permite escoger el nivel dificil
+     */
 	@FXML private Button dificil;
+	/**
+     * boton que permite volver al inicio del juego
+     */
 	@FXML private Button volver;
+	/**
+     * boton que permite llevar la jugador al campo de juego
+     */
 	@FXML private Button jugar;
+	/**
+     * area de texto que contendra un resumen de cada nivel
+     */
 	@FXML private TextArea contexto;
-	
+	/**
+     * char que simbolia el nivel que se escogio
+     */
 	private char tipo = 'N';
 	
+	/**
+     * metodo que permite inicializar los atributos
+     */
 	public void intialize() {
 		
 	}
-	
+	/**
+     * metodo que permite mostrar el resumen del nivel facil
+     */
 	public void facil() {
 		String texto = "";
 		tipo = 'F';
@@ -53,7 +82,9 @@ public class DificultadController {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+     * metodo que permite mostrar el resumen del nivel intermemdio
+     */
 	public void intermedio() {
 		String texto = "";
 		tipo = 'I';
@@ -70,7 +101,9 @@ public class DificultadController {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+     * metodo que permite mostrar el resumen del nivel dificil
+     */
 	public void dificil() {
 		String texto = "";
 		tipo = 'D';
@@ -87,7 +120,10 @@ public class DificultadController {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+     * metodo que permite volver al inicio del juego
+     * @param event - evento que da la ventana donde se encuentra
+     */
 	public void volver(Event event) {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("Inicio.fxml"));
@@ -100,7 +136,10 @@ public class DificultadController {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+     * metodo que permite llevar al jugador al campo de juego
+     * @param event - evento que da la ventana donde se encuentra
+     */
 	public void jugar(Event event) {
 		if(tipo == 'N') {
 			Alert alert = new Alert(AlertType.WARNING, "NO HA ESCOGIDO NINGUNA DIFICULTAD", ButtonType.OK);

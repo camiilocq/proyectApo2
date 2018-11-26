@@ -18,27 +18,77 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import modelo.Avion;
-
+/**
+ * @author Juan Camilo Castillo
+ * @author Jhonnier Isaza Gonzalez
+ * Esta es la clase JugadoresController que controla el archivo Jugadores.fxml
+ */
 public class JugadoresController {
-
+	/**
+	 * area de texto que simboliza el listado de jugadores
+	 */
 	@FXML private TextArea lisJugadores;
+	/**
+	 * textField que simboliza el nombre del jugador
+	 */
 	@FXML private TextField criterio;
+	/**
+	 * boton que permite buscar un jugado en especifico
+	 */
 	@FXML private Button buscar;
+	/**
+	 * check que permite ordenar los jugadores por nombre
+	 */
 	@FXML private CheckBox nombre;
+	/**
+	 * check que permite ordenar los jugadores por puntuacion
+	 */
 	@FXML private CheckBox puntuacion;
+	/**
+	 * boton que permite mostrar el primer jugador
+	 */
 	@FXML private Button primero;
+	/**
+	 * boton que permite mostrar el ultimo jugador
+	 */
 	@FXML private Button ultimo;
+	/**
+	 * boton que permite mostrar el ultimo jugador
+	 */
 	@FXML private Button totalJugadores;
+	/**
+	 * boton que permite volver al inicio del juego
+	 */
 	@FXML private Button volver;
 	
+	/**
+	 * metodo que permite inicializar los atributos de la clase
+	 */
 	public void initialize() {
 		lisJugadores.setEditable(false);
 		loadJugadores();
 	}
 	
+	/**
+	 *metodo que permite mostrar los jugadores en el campo de tetxo
+	 */
 	public void mostrar() {
-		
+		Avion act = Main.getNivel().getJugador();
+		int num = 1;
+		while(act != null) {
+			lisJugadores.setText(lisJugadores.getText()+num+". "+act.getNombre()+"\n");
+			num++;
+			act = act.getDer();
+		}act = Main.getNivel().getJugador();
+		while(act.getIzq()!=null){
+			lisJugadores.setText(lisJugadores.getText()+num+". "+act.getNombre()+"\n");
+			num++;
+			act = act.getIzq();
+		}
 	}
+	/**
+	 *metodo que buscar un jugador en especifico
+	 */
 	public void buscar() {
 		String dificultad = "";
 		if(criterio.getText()!=null) {
@@ -63,7 +113,9 @@ public class JugadoresController {
 			alert.showAndWait();	
 		}
 	}
-	
+	/**
+	 *metodo que mostar el primer jugador
+	 */
 	public void primero() {
 		loadJugadores();
 		String dificultad = "default";
@@ -81,7 +133,9 @@ public class JugadoresController {
 		alert.showAndWait();	
 		}
 		
-	
+	/**
+	 *metodo que mostrar el ultimo jugador
+	 */
 	public void ultimo() {
 		loadJugadores();
 		String dificultad = "default";
@@ -99,14 +153,24 @@ public class JugadoresController {
 		alert.showAndWait();	
 		}
 		
+	/**
+	 *metodo que permite hacer persistir los aviones
+	 */
 	public void loadJugadores() {
 		Main.getNivel().leer();
 	}
+	
+	/**
+	 *metodo que mostrar el numero de jugadores
+	 */
 	public void totalJugadores() {
 		Alert alert = new Alert(AlertType.INFORMATION, "HAY "+Main.getNivel().getNumAviones()+" AVION(ES)", ButtonType.OK);
 		alert.showAndWait();	
 	}
 	
+	/**
+	 *metodo que permite volver al inicio del juego
+	 */
 	public void volver(Event event) {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("Inicio.fxml"));

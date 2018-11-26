@@ -18,6 +18,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 /**
+ * @author Juan Camilo Castillo
+ * @author Jhonnier Isaza Gonzalez
  * Este es la clase AyudaController que controla el archivo Ayuda.fxml
  */
 public class AyudaController {
