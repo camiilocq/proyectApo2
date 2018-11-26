@@ -17,13 +17,22 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
-
+/**
+ * Este es la clase AyudaController que controla el archivo Ayuda.fxml
+ */
 public class AyudaController {
-
+	/**
+     * Boton que permite volver al inicio del juego
+     */
 	@FXML private Button volver;
+	/**
+     * campo de texto que muestra el mensaje de ayuda
+     */
 	@FXML private TextArea ayuda;
 	
-	
+	/**
+     *metodo que inicializa los atributos de la clase
+     */
 	public void initialize() {
 		String texto = "";
 		try {
@@ -39,7 +48,10 @@ public class AyudaController {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+     * Metodo que permite volver al inicio del juego
+     * @param event - evento que permite obtener la ventana
+     */
 	public void volver(Event event) {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("Inicio.fxml"));

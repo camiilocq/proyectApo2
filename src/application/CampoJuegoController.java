@@ -27,44 +27,104 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import modelo.Avion;
 
-
+/**
+ * Esta es la clase CampoJuegoController que controla el archivo CampoJuego.fxml
+ */
 public class CampoJuegoController {
-	
+	/**
+     * Imagen que controla el avion en el juego
+     */
 	@FXML private ImageView  jugador;
+	/**
+     * Imagen que controla el edificio #1
+     */
 	@FXML private ImageView edificio1;
+	/**
+     * Imagen que controla el edificio #2
+     */
 	@FXML private ImageView edificio2;
+	/**
+     * Imagen que controla el edificio #3
+     */
 	@FXML private ImageView edificio3;
+	/**
+     * Imagen que controla el edificio #4
+     */
 	@FXML private ImageView edificio4;
+	/**
+     * Imagen que controla el edificio #5
+     */
 	@FXML private ImageView edificio5;
+	/**
+     * Imagen que controla el edificio #6
+     */
 	@FXML private ImageView edificio6;
+	/**
+     * Imagen que controla el edificio #7
+     */
 	@FXML private ImageView edificio7;
+	/**
+     * Imagen que controla el edificio #8
+     */
 	@FXML private ImageView edificio8;
 	
+	/**
+     * Imagen que controla el misil que dispara el avion
+     */
 	@FXML private ImageView misil;
+	/**
+     * Imagen que controla el fondo del juego
+     */
+	@FXML private ImageView fondo;
 	
-	@FXML
-	private ImageView fondo;
-	
-	
+	/**
+     * Etiqueta que simboliza el tiempo del jugador
+     */
 	@FXML private Label tiempo;
+	/**
+     * Etiqueta que simboliza la puntuacion del jugador
+     */
 	@FXML private Label puntuacion;
+	/**
+     * Etiqueta que simboliza el nombre del jugador
+     */
 	@FXML private Label nomJugador;
-	
+	/**
+     * Rectangulo que simboliza el tamaño del campo de juego
+     */
 	@FXML private Rectangle pane;
-	
+	/**
+     * Boton que permite pausar el juego
+     */
 	@FXML private Button pausar;
+	/**
+     * Boton que permite reiniciar el juego
+     */
 	@FXML private Button reiniciar;
+	/**
+     * Boton que permite guardar el juego
+     */
 	@FXML private Button guardar;
 	
-	private boolean control;
-	private boolean juego;
-	
+	/**
+     *Hilo que permite la actualizacion del tiempo
+     */
 	private HiloTiempo hTiempo;
+	/**
+     *Hilo que permite la actualizacion del puntaje
+     */
 	private HiloPuntuacion hPuntuacion;
+	/**
+     * linea de tiempo que permite la animacion del juego
+     */
 	private Timeline animation;
-	
+	/**
+     *avion que sera el jugador del juego
+     */
 	private Avion juga;
-	
+	/**
+     * metodo que permite la inicializacion de los atributos
+     */
 	public void initialize() {
 		juga = Main.getNivel().getJugador().darMenor();
 		//======================================================================================
@@ -77,7 +137,6 @@ public class CampoJuegoController {
 		//======================================================================================
 		
 		nomJugador.setText(juga.getNombre().toUpperCase());
-		juego = true; 
 		misil.setVisible(false);
 
 		
@@ -208,13 +267,6 @@ public class CampoJuegoController {
 		return retorno;
 	}
 
-	public boolean isControl() {
-		return control;
-	}
-
-	public void setControl(boolean control) {
-		this.control = control;
-	}
 
 	public boolean isJuego() {
 		if(animation.getStatus().equals(Animation.Status.RUNNING)) {
@@ -223,11 +275,7 @@ public class CampoJuegoController {
 			return false;
 		}
 	}
-
-	public void setJuego(boolean juego) {
-		this.juego = juego;
-	}
-
+	
 	public Label getTiempo() {
 		return tiempo;
 	}
